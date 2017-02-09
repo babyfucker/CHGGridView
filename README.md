@@ -7,7 +7,6 @@
 使用说明 
 
 广告模式 
-
 self.adView = [[CHGAdView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
 _adView.data = @[@"http://ww1.sinaimg.cn/large/7efb7362jw1e3rgypjtzvj.jpg",
 @"http://img.3366.com/fileupload/img/commmanage/151/6780_1.jpg",
@@ -22,7 +21,6 @@ _adView.dataSource = self;
 
 
 页面启动导航模式 （CHGAdView 导航模式，此模式只需要将isCycleShow、isTimerShow的属性设置为“NO”即可）
-
 self.adView = [[CHGAdView alloc] initWithFrame:[UIScreen mainScreen].bounds];
 _adView.data = @[@"http://ww1.sinaimg.cn/large/7efb7362jw1e3rgypjtzvj.jpg",
 @"http://img.3366.com/fileupload/img/commmanage/151/6780_1.jpg",
@@ -36,7 +34,6 @@ _adView.dataSource = self;
 
 
 菜单模式（类似大众点评） 
-
 self.menu = [[CHGMenu alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 660)];
 _menu.items = [self simulationData];
 _menu.showPageControl = YES;//是否显示pageControll
@@ -47,7 +44,6 @@ _menu.gridViewDelegate = self;
 
 
 tab切换 
-
 self.tabPage = [[CHGTabPage alloc] initWithFrame:CGRectMake(0, _userVCMode ? 20 : 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - (_userVCMode ? 20 : 64))];
 _tabPage.tabPageDataSource = self;
 _tabPage.gridViewDelegate = self;
