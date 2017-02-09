@@ -53,7 +53,7 @@
     _pageControl.currentPage = currPage;
     _pageControl.currentPageIndicatorTintColor = [UIColor redColor];;
     _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    _pageControl.userInteractionEnabled = NO;
+//     _pageControl.userInteractionEnabled = NO;
     [_gridView reloadData];
 }
 
@@ -115,6 +115,7 @@
 -(void)setShowPageControl:(BOOL)showPageControl{
     _showPageControl = showPageControl;
     _pageControl.hidden = !showPageControl;
+    _pageControl.userInteractionEnabled = NO;   //此处关闭交互有效
     self.gridView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
