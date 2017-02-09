@@ -43,7 +43,7 @@ _menu.gridViewDelegate = self;
 [_menu.gridView registerNibName:@"AdCell" forCellReuseIdentifier:@"AdCell"];
 
 
- **tab切换**  
+ **tab切换**
 self.tabPage = [[CHGTabPage alloc] initWithFrame:CGRectMake(0, _userVCMode ? 20 : 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - (_userVCMode ? 20 : 64))];
 _tabPage.tabPageDataSource = self;
 _tabPage.gridViewDelegate = self;
