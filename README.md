@@ -18,7 +18,7 @@ _adView.isShowPageControll = YES;//是否显示pageControll
 _adView.dataSource = self;
 [_adView.chgMenu.gridView registerNibName:@"AdCell" forCellReuseIdentifier:@"AdCell"];
 [_adView reloadData];
-[self.view addSubview:_adView];
+[self.view addSubview:_adView]
 
 
  **页面启动导航模式 （CHGAdView 导航模式，此模式只需要将isCycleShow、isTimerShow的属性设置为“NO”即可）** 

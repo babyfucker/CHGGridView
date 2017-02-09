@@ -13,8 +13,9 @@
 ///广告数据datasource
 @protocol AdViewDataSource <NSObject>
 
+///返回view
 -(CHGGridViewCell*)adView:(id)adView itemAtIndex:(NSInteger) position withData:(NSDictionary*)data;
-
+///当广告页面被点击返回
 -(void)adView:(id)adView didSelectInPosition:(NSInteger)position withData:(NSDictionary*)data;
 
 @end
@@ -31,7 +32,7 @@
 @property(nonatomic,assign) BOOL isShowPageControll;   //是否显示pagecontroll
 @property (nonatomic, assign) BOOL            isDragging;//是否开始拖动
 @property(nonatomic,assign) BOOL islayout;
-@property(nonatomic,weak)id<AdViewDataSource>  dataSource;
+@property(nonatomic,weak) id<AdViewDataSource>  dataSource;
 @property(nonatomic,strong) NSTimer * timer;
 
 
