@@ -8,16 +8,15 @@
 
 广告模式 
 self.adView = [[CHGAdView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
-    _adView.data = @[@"http://ww1.sinaimg.cn/large/7efb7362jw1e3rgypjtzvj.jpg",
-                     @"http://img.3366.com/fileupload/img/commmanage/151/6780_1.jpg",
-                     @"http://pic1.nipic.com/2008-11-05/2008115214135913_2.jpg"];//[self simulationData];
-    _adView.isCycleShow = YES;//是否循环显示
-    _adView.isTimerShow = YES;//是否启用定时切换
-    _adView.isShowPageControll = YES;//是否显示pageControll
-    _adView.dataSource = self;
-    [_adView.chgMenu.gridView registerNibName:@"AdCell" forCellReuseIdentifier:@"AdCell"];
-    [_adView reloadData];
-    [self.view addSubview:_adView];
+        _adView.data = @[@"http://ww1.sinaimg.cn/large/7efb7362jw1e3rgypjtzvj.jpg",
+                         @"http://img.3366.com/fileupload/img/commmanage/151/6780_1.jpg",
+                         @"http://pic1.nipic.com/2008-11-05/2008115214135913_2.jpg"];//[self simulationData];
+        _adView.isCycleShow = YES;//是否循环显示
+        _adView.isTimerShow = YES;//是否启用定时切换
+        _adView.isShowPageControll = YES;//是否显示pageControll
+        _adView.dataSource = self;
+        [_adView.chgMenu.gridView registerNibName:@"AdCell" forCellReuseIdentifier:@"AdCell"];
+        [_adView reloadData];
 
 
 页面启动导航模式 （CHGAdView 导航模式，此模式只需要将isCycleShow、isTimerShow的属性设置为“NO”即可）
@@ -35,12 +34,12 @@ self.adView = [[CHGAdView alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
 菜单模式（类似大众点评） 
 self.menu = [[CHGMenu alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 660)];
-        _menu.items = [self simulationData];
-        _menu.showPageControl = YES;//是否显示pageControll
-        _menu.gridViewDatasource = self;
-        _menu.gridViewDelegate = self;
-        [_menu.gridView registerNibName:@"MenuItemCell" forCellReuseIdentifier:@"MenuItemCell"];
-        [_menu.gridView registerNibName:@"AdCell" forCellReuseIdentifier:@"AdCell"];
+    _menu.items = [self simulationData];
+    _menu.showPageControl = YES;//是否显示pageControll
+    _menu.gridViewDatasource = self;
+    _menu.gridViewDelegate = self;
+    [_menu.gridView registerNibName:@"MenuItemCell" forCellReuseIdentifier:@"MenuItemCell"];
+    [_menu.gridView registerNibName:@"AdCell" forCellReuseIdentifier:@"AdCell"];
 
 
 tab切换 
