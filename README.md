@@ -4,9 +4,10 @@
 ![输入图片说明](http://files.git.oschina.net/group1/M00/00/DC/PaAvDFicDRGAbesaAL0tw-vAHG0438.gif?token=fbf28001ad97bef3907f7f627fb81cfc&ts=1486621906&attname=演示图片.gif "在这里输入图片标题")
 
 
-  _**使用说明**_ 
+###   _**使用说明**_ 
 
- **广告模式**  
+
+ **广告模式**
 self.adView = [[CHGAdView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 200)];
 _adView.data = @[@"http://ww1.sinaimg.cn/large/7efb7362jw1e3rgypjtzvj.jpg",
 @"http://img.3366.com/fileupload/img/commmanage/151/6780_1.jpg",
