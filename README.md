@@ -1,7 +1,7 @@
 #CHGGridView
 完成1.0版
 功能包括 应用启动导航、广告模式、菜单模式（类似大众点评）、tab模式
-![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015444_dd33c2ee_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015502_27ecd593_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015511_15a49e1b_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015529_de244cc5_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015539_5a2b3da8_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015548_e0384aa4_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015556_29f53d39_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015605_9340dc9b_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015613_c72868fd_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015623_c0ddf248_3935.jpeg "在这里输入图片标题")![输入图片说明](http://git.oschina.net/uploads/images/2016/0822/015632_d0974ddd_3935.jpeg "在这里输入图片标题")![输入图片说明](http://files.git.oschina.net/group1/M00/00/DC/PaAvDFicDRGAbesaAL0tw-vAHG0438.gif?token=fbf28001ad97bef3907f7f627fb81cfc&ts=1486621906&attname=演示图片.gif "在这里输入图片标题")
+![输入图片说明](http://files.git.oschina.net/group1/M00/00/DC/PaAvDFicDRGAbesaAL0tw-vAHG0438.gif?token=fbf28001ad97bef3907f7f627fb81cfc&ts=1486621906&attname=演示图片.gif "在这里输入图片标题")
 
 
 使用说明 
