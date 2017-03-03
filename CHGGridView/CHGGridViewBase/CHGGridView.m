@@ -78,6 +78,11 @@
     }
 }
 
+-(void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    self.backgroundColor = self.backgroundColor;
+}
+
 -(void)reloadData {
     [self initView];
     [self startTimer];
@@ -196,7 +201,8 @@
 -(void)itemTouchUpInside:(id)sender {
     if (_gridViewDelegate == nil) return;
     CHGGridViewCell * cell = sender;
-    [_gridViewDelegate gridView:self didSelecteAtPosition:cell.tag withData:_data[cell.tag - 1]];
+    NSLog(@"tag:%li",cell.tag);
+    [_gridViewDelegate gridView:self didSelecteAtPosition:cell.tag withData:_data[cell.tag]];
 }
 
 -(CGRect)calculateFrameWithPosition:(NSInteger)position andColumn:(NSInteger)column andPage:(NSInteger)page {

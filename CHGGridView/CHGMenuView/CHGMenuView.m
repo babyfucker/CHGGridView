@@ -38,9 +38,8 @@
     return self;
 }
 
-
 - (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
+//    [super drawRect:rect];
     [self addSubview:_gridView];
     [self addSubview:_pageControl];
     [_gridView addObserver:self forKeyPath:@"curryPage" options:NSKeyValueObservingOptionNew context:NULL];
@@ -60,6 +59,7 @@
     _gridView.gridViewDelegate = self;
     _gridView.gridViewDataSource = self;
     _gridView.timeInterval = _timeInterval;
+    _gridView.backgroundColor = self.backgroundColor;
     
     _pageControl.currentPage = _gridView.curryPage;
     _pageControl.currentPageIndicatorTintColor = _currentPageIndicatorTintColor;

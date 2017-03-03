@@ -77,7 +77,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0kb-Bh-VNI" customClass="CHGMenuView">
                     <rect key="frame" x="0.0" y="95" width="375" height="527"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="menuViewDataSource" destination="-1" id="0pW-jO-JBO"/>
                         <outlet property="menuViewDelegate" destination="-1" id="SZX-LL-l7M"/>

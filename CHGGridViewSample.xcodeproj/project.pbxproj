@@ -7,47 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E50EC621E69528600CDE055 /* CHGMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E50EC611E69528600CDE055 /* CHGMenuView.m */; };
 		0E50EC671E69602500CDE055 /* CHGMenuViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E50EC651E69602500CDE055 /* CHGMenuViewDemoViewController.m */; };
 		0E50EC681E69602500CDE055 /* CHGMenuViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E50EC661E69602500CDE055 /* CHGMenuViewDemoViewController.xib */; };
-		0E50EC6B1E6969FE00CDE055 /* CHGTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E50EC6A1E6969FE00CDE055 /* CHGTab.m */; };
-		0E50EC6E1E696A2100CDE055 /* CHGTabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E50EC6D1E696A2100CDE055 /* CHGTabItem.m */; };
-		0E50EC711E696A3600CDE055 /* CHGSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E50EC701E696A3600CDE055 /* CHGSlider.m */; };
-		0E50EC741E696A4A00CDE055 /* CHGTabPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E50EC731E696A4A00CDE055 /* CHGTabPageView.m */; };
 		0EABAFB01E690559004917EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFAF1E690559004917EB /* main.m */; };
 		0EABAFB31E690559004917EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFB21E690559004917EB /* AppDelegate.m */; };
 		0EABAFBC1E690559004917EB /* CHGGridViewSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFBA1E690559004917EB /* CHGGridViewSample.xcdatamodeld */; };
 		0EABAFBE1E690559004917EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EABAFBD1E690559004917EB /* Assets.xcassets */; };
 		0EABAFC11E690559004917EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EABAFBF1E690559004917EB /* LaunchScreen.storyboard */; };
-		0EABAFCE1E690623004917EB /* CHGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFCD1E690623004917EB /* CHGGridView.m */; };
-		0EABAFD11E6906E5004917EB /* CHGGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFD01E6906E5004917EB /* CHGGridViewCell.m */; };
 		0EABAFD61E691E31004917EB /* CHGGridViewBaseDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFD41E691E31004917EB /* CHGGridViewBaseDemoViewController.m */; };
 		0EABAFD71E691E31004917EB /* CHGGridViewBaseDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EABAFD51E691E31004917EB /* CHGGridViewBaseDemoViewController.xib */; };
 		0EABAFDB1E691FE0004917EB /* Test1GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFDA1E691FE0004917EB /* Test1GridViewCell.m */; };
 		0EABAFDD1E691FE9004917EB /* Test1GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EABAFDC1E691FE9004917EB /* Test1GridViewCell.xib */; };
-		5F1C39F11E69AF1300F51EEA /* UIView+CHGBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C39F01E69AF1300F51EEA /* UIView+CHGBase.m */; };
 		5F1C39F61E69BDBC00F51EEA /* CHGTabPageViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C39F41E69BDBC00F51EEA /* CHGTabPageViewViewController.m */; };
 		5F1C39F71E69BDBC00F51EEA /* CHGTabPageViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C39F51E69BDBC00F51EEA /* CHGTabPageViewViewController.xib */; };
 		5F1C39FB1E69C15100F51EEA /* TabItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C39FA1E69C15100F51EEA /* TabItem1.m */; };
 		5F1C39FD1E69C15E00F51EEA /* TabItem1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C39FC1E69C15E00F51EEA /* TabItem1.xib */; };
 		5F1C3A021E69D3F800F51EEA /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A001E69D3F800F51EEA /* SampleViewController.m */; };
 		5F1C3A031E69D3F800F51EEA /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C3A011E69D3F800F51EEA /* SampleViewController.xib */; };
+		5F1C3A0E1E69DBFA00F51EEA /* CHGSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A051E69DBFA00F51EEA /* CHGSlider.m */; };
+		5F1C3A0F1E69DBFA00F51EEA /* CHGTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A071E69DBFA00F51EEA /* CHGTab.m */; };
+		5F1C3A101E69DBFA00F51EEA /* CHGTabItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A091E69DBFA00F51EEA /* CHGTabItem.m */; };
+		5F1C3A111E69DBFA00F51EEA /* CHGTabPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A0B1E69DBFA00F51EEA /* CHGTabPageView.m */; };
+		5F1C3A121E69DBFA00F51EEA /* UIView+CHGBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A0D1E69DBFA00F51EEA /* UIView+CHGBase.m */; };
+		5F1C3A151E69DC1500F51EEA /* CHGMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A141E69DC1500F51EEA /* CHGMenuView.m */; };
+		5F1C3A2A1E69DCE100F51EEA /* CHGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A271E69DCE100F51EEA /* CHGGridView.m */; };
+		5F1C3A2B1E69DCE100F51EEA /* CHGGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A291E69DCE100F51EEA /* CHGGridViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E50EC601E69528600CDE055 /* CHGMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGMenuView.h; sourceTree = "<group>"; };
-		0E50EC611E69528600CDE055 /* CHGMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGMenuView.m; sourceTree = "<group>"; };
 		0E50EC641E69602500CDE055 /* CHGMenuViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGMenuViewDemoViewController.h; sourceTree = "<group>"; };
 		0E50EC651E69602500CDE055 /* CHGMenuViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGMenuViewDemoViewController.m; sourceTree = "<group>"; };
 		0E50EC661E69602500CDE055 /* CHGMenuViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHGMenuViewDemoViewController.xib; sourceTree = "<group>"; };
-		0E50EC691E6969FE00CDE055 /* CHGTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGTab.h; sourceTree = "<group>"; };
-		0E50EC6A1E6969FE00CDE055 /* CHGTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGTab.m; sourceTree = "<group>"; };
-		0E50EC6C1E696A2100CDE055 /* CHGTabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGTabItem.h; sourceTree = "<group>"; };
-		0E50EC6D1E696A2100CDE055 /* CHGTabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGTabItem.m; sourceTree = "<group>"; };
-		0E50EC6F1E696A3600CDE055 /* CHGSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGSlider.h; sourceTree = "<group>"; };
-		0E50EC701E696A3600CDE055 /* CHGSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGSlider.m; sourceTree = "<group>"; };
-		0E50EC721E696A4A00CDE055 /* CHGTabPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGTabPageView.h; sourceTree = "<group>"; };
-		0E50EC731E696A4A00CDE055 /* CHGTabPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGTabPageView.m; sourceTree = "<group>"; };
 		0EABAFAB1E690559004917EB /* CHGGridViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHGGridViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EABAFAF1E690559004917EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0EABAFB11E690559004917EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -56,18 +46,12 @@
 		0EABAFBD1E690559004917EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EABAFC01E690559004917EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EABAFC21E690559004917EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0EABAFCC1E690623004917EB /* CHGGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGGridView.h; sourceTree = "<group>"; };
-		0EABAFCD1E690623004917EB /* CHGGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGGridView.m; sourceTree = "<group>"; };
-		0EABAFCF1E6906E5004917EB /* CHGGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGGridViewCell.h; sourceTree = "<group>"; };
-		0EABAFD01E6906E5004917EB /* CHGGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGGridViewCell.m; sourceTree = "<group>"; };
 		0EABAFD31E691E31004917EB /* CHGGridViewBaseDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGGridViewBaseDemoViewController.h; sourceTree = "<group>"; };
 		0EABAFD41E691E31004917EB /* CHGGridViewBaseDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGGridViewBaseDemoViewController.m; sourceTree = "<group>"; };
 		0EABAFD51E691E31004917EB /* CHGGridViewBaseDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHGGridViewBaseDemoViewController.xib; sourceTree = "<group>"; };
 		0EABAFD91E691FE0004917EB /* Test1GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test1GridViewCell.h; sourceTree = "<group>"; };
 		0EABAFDA1E691FE0004917EB /* Test1GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test1GridViewCell.m; sourceTree = "<group>"; };
 		0EABAFDC1E691FE9004917EB /* Test1GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test1GridViewCell.xib; sourceTree = "<group>"; };
-		5F1C39EF1E69AF1300F51EEA /* UIView+CHGBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CHGBase.h"; sourceTree = "<group>"; };
-		5F1C39F01E69AF1300F51EEA /* UIView+CHGBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CHGBase.m"; sourceTree = "<group>"; };
 		5F1C39F31E69BDBC00F51EEA /* CHGTabPageViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGTabPageViewViewController.h; sourceTree = "<group>"; };
 		5F1C39F41E69BDBC00F51EEA /* CHGTabPageViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGTabPageViewViewController.m; sourceTree = "<group>"; };
 		5F1C39F51E69BDBC00F51EEA /* CHGTabPageViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHGTabPageViewViewController.xib; sourceTree = "<group>"; };
@@ -77,6 +61,22 @@
 		5F1C39FF1E69D3F800F51EEA /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
 		5F1C3A001E69D3F800F51EEA /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 		5F1C3A011E69D3F800F51EEA /* SampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
+		5F1C3A041E69DBFA00F51EEA /* CHGSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGSlider.h; path = CHGGridView/CHGTabPageView/CHGSlider.h; sourceTree = "<group>"; };
+		5F1C3A051E69DBFA00F51EEA /* CHGSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGSlider.m; path = CHGGridView/CHGTabPageView/CHGSlider.m; sourceTree = "<group>"; };
+		5F1C3A061E69DBFA00F51EEA /* CHGTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGTab.h; path = CHGGridView/CHGTabPageView/CHGTab.h; sourceTree = "<group>"; };
+		5F1C3A071E69DBFA00F51EEA /* CHGTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGTab.m; path = CHGGridView/CHGTabPageView/CHGTab.m; sourceTree = "<group>"; };
+		5F1C3A081E69DBFA00F51EEA /* CHGTabItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGTabItem.h; path = CHGGridView/CHGTabPageView/CHGTabItem.h; sourceTree = "<group>"; };
+		5F1C3A091E69DBFA00F51EEA /* CHGTabItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGTabItem.m; path = CHGGridView/CHGTabPageView/CHGTabItem.m; sourceTree = "<group>"; };
+		5F1C3A0A1E69DBFA00F51EEA /* CHGTabPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGTabPageView.h; path = CHGGridView/CHGTabPageView/CHGTabPageView.h; sourceTree = "<group>"; };
+		5F1C3A0B1E69DBFA00F51EEA /* CHGTabPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGTabPageView.m; path = CHGGridView/CHGTabPageView/CHGTabPageView.m; sourceTree = "<group>"; };
+		5F1C3A0C1E69DBFA00F51EEA /* UIView+CHGBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CHGBase.h"; path = "CHGGridView/CHGTabPageView/UIView+CHGBase.h"; sourceTree = "<group>"; };
+		5F1C3A0D1E69DBFA00F51EEA /* UIView+CHGBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CHGBase.m"; path = "CHGGridView/CHGTabPageView/UIView+CHGBase.m"; sourceTree = "<group>"; };
+		5F1C3A131E69DC1500F51EEA /* CHGMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGMenuView.h; path = CHGGridView/CHGMenuView/CHGMenuView.h; sourceTree = "<group>"; };
+		5F1C3A141E69DC1500F51EEA /* CHGMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGMenuView.m; path = CHGGridView/CHGMenuView/CHGMenuView.m; sourceTree = "<group>"; };
+		5F1C3A261E69DCE100F51EEA /* CHGGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGGridView.h; path = CHGGridView/CHGGridViewBase/CHGGridView.h; sourceTree = "<group>"; };
+		5F1C3A271E69DCE100F51EEA /* CHGGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGGridView.m; path = CHGGridView/CHGGridViewBase/CHGGridView.m; sourceTree = "<group>"; };
+		5F1C3A281E69DCE100F51EEA /* CHGGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGGridViewCell.h; path = CHGGridView/CHGGridViewBase/CHGGridViewCell.h; sourceTree = "<group>"; };
+		5F1C3A291E69DCE100F51EEA /* CHGGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGGridViewCell.m; path = CHGGridView/CHGGridViewBase/CHGGridViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +151,6 @@
 				0EABAFCB1E6905DA004917EB /* CHGTabPageView */,
 				0EABAFCA1E6905B4004917EB /* CHGMenuView */,
 				0EABAFC91E6905A5004917EB /* CHGGridViewBase */,
-				5F1C39EF1E69AF1300F51EEA /* UIView+CHGBase.h */,
-				5F1C39F01E69AF1300F51EEA /* UIView+CHGBase.m */,
 			);
 			name = CHGGridView;
 			sourceTree = "<group>";
@@ -160,10 +158,10 @@
 		0EABAFC91E6905A5004917EB /* CHGGridViewBase */ = {
 			isa = PBXGroup;
 			children = (
-				0EABAFCC1E690623004917EB /* CHGGridView.h */,
-				0EABAFCD1E690623004917EB /* CHGGridView.m */,
-				0EABAFCF1E6906E5004917EB /* CHGGridViewCell.h */,
-				0EABAFD01E6906E5004917EB /* CHGGridViewCell.m */,
+				5F1C3A261E69DCE100F51EEA /* CHGGridView.h */,
+				5F1C3A271E69DCE100F51EEA /* CHGGridView.m */,
+				5F1C3A281E69DCE100F51EEA /* CHGGridViewCell.h */,
+				5F1C3A291E69DCE100F51EEA /* CHGGridViewCell.m */,
 			);
 			name = CHGGridViewBase;
 			sourceTree = "<group>";
@@ -171,8 +169,8 @@
 		0EABAFCA1E6905B4004917EB /* CHGMenuView */ = {
 			isa = PBXGroup;
 			children = (
-				0E50EC601E69528600CDE055 /* CHGMenuView.h */,
-				0E50EC611E69528600CDE055 /* CHGMenuView.m */,
+				5F1C3A131E69DC1500F51EEA /* CHGMenuView.h */,
+				5F1C3A141E69DC1500F51EEA /* CHGMenuView.m */,
 			);
 			name = CHGMenuView;
 			sourceTree = "<group>";
@@ -180,14 +178,16 @@
 		0EABAFCB1E6905DA004917EB /* CHGTabPageView */ = {
 			isa = PBXGroup;
 			children = (
-				0E50EC721E696A4A00CDE055 /* CHGTabPageView.h */,
-				0E50EC731E696A4A00CDE055 /* CHGTabPageView.m */,
-				0E50EC691E6969FE00CDE055 /* CHGTab.h */,
-				0E50EC6A1E6969FE00CDE055 /* CHGTab.m */,
-				0E50EC6C1E696A2100CDE055 /* CHGTabItem.h */,
-				0E50EC6D1E696A2100CDE055 /* CHGTabItem.m */,
-				0E50EC6F1E696A3600CDE055 /* CHGSlider.h */,
-				0E50EC701E696A3600CDE055 /* CHGSlider.m */,
+				5F1C3A041E69DBFA00F51EEA /* CHGSlider.h */,
+				5F1C3A051E69DBFA00F51EEA /* CHGSlider.m */,
+				5F1C3A061E69DBFA00F51EEA /* CHGTab.h */,
+				5F1C3A071E69DBFA00F51EEA /* CHGTab.m */,
+				5F1C3A081E69DBFA00F51EEA /* CHGTabItem.h */,
+				5F1C3A091E69DBFA00F51EEA /* CHGTabItem.m */,
+				5F1C3A0A1E69DBFA00F51EEA /* CHGTabPageView.h */,
+				5F1C3A0B1E69DBFA00F51EEA /* CHGTabPageView.m */,
+				5F1C3A0C1E69DBFA00F51EEA /* UIView+CHGBase.h */,
+				5F1C3A0D1E69DBFA00F51EEA /* UIView+CHGBase.m */,
 			);
 			name = CHGTabPageView;
 			sourceTree = "<group>";
@@ -313,21 +313,21 @@
 			files = (
 				0EABAFB31E690559004917EB /* AppDelegate.m in Sources */,
 				0EABAFB01E690559004917EB /* main.m in Sources */,
-				5F1C39F11E69AF1300F51EEA /* UIView+CHGBase.m in Sources */,
+				5F1C3A0F1E69DBFA00F51EEA /* CHGTab.m in Sources */,
+				5F1C3A101E69DBFA00F51EEA /* CHGTabItem.m in Sources */,
+				5F1C3A121E69DBFA00F51EEA /* UIView+CHGBase.m in Sources */,
+				5F1C3A2B1E69DCE100F51EEA /* CHGGridViewCell.m in Sources */,
 				5F1C39F61E69BDBC00F51EEA /* CHGTabPageViewViewController.m in Sources */,
-				0E50EC6B1E6969FE00CDE055 /* CHGTab.m in Sources */,
-				0E50EC711E696A3600CDE055 /* CHGSlider.m in Sources */,
-				0E50EC621E69528600CDE055 /* CHGMenuView.m in Sources */,
 				0E50EC671E69602500CDE055 /* CHGMenuViewDemoViewController.m in Sources */,
-				0E50EC741E696A4A00CDE055 /* CHGTabPageView.m in Sources */,
 				0EABAFBC1E690559004917EB /* CHGGridViewSample.xcdatamodeld in Sources */,
 				5F1C3A021E69D3F800F51EEA /* SampleViewController.m in Sources */,
-				0EABAFCE1E690623004917EB /* CHGGridView.m in Sources */,
-				0E50EC6E1E696A2100CDE055 /* CHGTabItem.m in Sources */,
+				5F1C3A111E69DBFA00F51EEA /* CHGTabPageView.m in Sources */,
 				5F1C39FB1E69C15100F51EEA /* TabItem1.m in Sources */,
+				5F1C3A2A1E69DCE100F51EEA /* CHGGridView.m in Sources */,
 				0EABAFD61E691E31004917EB /* CHGGridViewBaseDemoViewController.m in Sources */,
-				0EABAFD11E6906E5004917EB /* CHGGridViewCell.m in Sources */,
+				5F1C3A0E1E69DBFA00F51EEA /* CHGSlider.m in Sources */,
 				0EABAFDB1E691FE0004917EB /* Test1GridViewCell.m in Sources */,
+				5F1C3A151E69DC1500F51EEA /* CHGMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
