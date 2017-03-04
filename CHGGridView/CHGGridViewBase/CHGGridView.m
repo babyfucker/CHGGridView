@@ -71,12 +71,12 @@
     [self startTimer];
 }
 
--(void)layoutSubviews {
-    [super layoutSubviews];
-    if (_maxColumnsOfOnePage != 0) {
-        [self initView];
-    }
-}
+//-(void)layoutSubviews {
+//    [super layoutSubviews];
+//    if (_maxColumnsOfOnePage != 0) {
+//        [self initView];
+//    }
+//}
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
