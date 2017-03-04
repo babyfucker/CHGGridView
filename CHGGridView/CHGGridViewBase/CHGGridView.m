@@ -64,7 +64,7 @@
     [super drawRect:rect];
     
     self.delegate = self;
-    [self initView];
+    [self initViewFromReload:NO];
     if (_isCycleShow) {
         [self scroll2Page:1 animated:NO];
     }
@@ -84,7 +84,7 @@
 }
 
 -(void)reloadData {
-    [self initView];
+    [self initViewFromReload:YES];
     [self startTimer];
 }
 
@@ -116,7 +116,7 @@
 }
 
 ///初始化view
--(void)initView {
+-(void)initViewFromReload:(BOOL)isFromReload {
     //获取单页中最大列数
     NSInteger maxColumnsOfOnePageTemp = [_gridViewDataSource numberOfColumnsInGridView:self];
     //获取单页中最大行数
@@ -141,8 +141,9 @@
         [self createAllRegisterCellType];
     }
     
+    
     self.contentSize = CGSizeMake(self.frame.size.width * _pageCount, 1);
-    [self createCellsOfPage:_curryPage isResize:reSize];
+    [self createCellsOfPage:isFromReload ? _curryPage : _isCycleShow ? 1 : 0 isResize:reSize];
 }
 
 ///创建指定页面的cell
@@ -201,7 +202,7 @@
 -(void)itemTouchUpInside:(id)sender {
     if (_gridViewDelegate == nil) return;
     CHGGridViewCell * cell = sender;
-    NSLog(@"tag:%li",cell.tag);
+//    NSLog(@"tag:%li",cell.tag);
     [_gridViewDelegate gridView:self didSelecteAtPosition:cell.tag withData:_data[cell.tag]];
 }
 
@@ -285,27 +286,29 @@
     [_gridViewScrollDelegate didScrollInGridView:self];
     scrollViewDidEndDragging = NO;
     scrollViewDidEndDecelerating = NO;
-    if (scrollDirection == ScrollDirectionLeft) {
-        [self createCellsOfPage:_curryPage isResize:NO];
-    } else if(scrollDirection == ScrollDirectionRight){
-        [self createCellsOfPage:_curryPage - 1 isResize:NO];
-    }
+//    if (scrollDirection == ScrollDirectionLeft) {
+//        [self createCellsOfPage:_curryPage isResize:NO];
+//    } else if(scrollDirection == ScrollDirectionRight){
+//        [self createCellsOfPage:_curryPage - 1 isResize:NO];
+//    }
 }
 
 ///手指结束拖动
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     [_gridViewScrollDelegate gridView:self didEndDraggingWillDecelerate:decelerate];
-    [self scrollViewDidStop:scrollView];
+//    [self scrollViewDidStop:scrollView];
 }
 
-///已经结束减速
+///已经结束减速（停止滑动）
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [_gridViewScrollDelegate didEndDeceleleratingInGridView:self];
     [self scrollViewDidStop:scrollView];
+//    NSLog(@"当前页：%li",_curryPage);
 }
 
 ///滑动中
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    NSLog(@"滑动中");
     [_gridViewScrollDelegate didScrollInGridView:self];
     CGFloat currScrollX = scrollView.contentOffset.x;
     if (currScrollX > lastScrollDownX) {
@@ -321,20 +324,18 @@
             [self createCellsOfPage:_curryPage isResize:NO];
         }
     }
-    
     lastScrollDownX = currScrollX;
     self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
+    
+    ///循环滚动
     if (_isCycleShow) {
         if (_curryPage == 0 && self.contentOffset.x <= 0) {
             scrollView.contentOffset = CGPointMake(self.frame.size.width * (_pageCount - 2) + self.contentOffset.x, 0);
         } else if(_curryPage == _pageCount - 1 && self.contentOffset.x >= self.frame.size.width * (_pageCount - 1)){
             CGFloat xx = self.contentOffset.x - self.frame.size.width * (_pageCount - 1);
             scrollView.contentOffset = CGPointMake(self.frame.size.width + xx, 0);
-        } else if (_curryPage == 1 && self.contentOffset.x <= self.frame.size.width){
-            if (scrollDirection == ScrollDirectionRight) {
-                [self createCellsOfPage:0 isResize:NO];
-            }
         }
+        [self createCellsOfPage:_curryPage isResize:NO];
     }
 }
 
@@ -350,13 +351,14 @@
     [_gridViewScrollDelegate didStopInGridView:self];
     scrollViewDidEndDecelerating = YES;
     scrollDirection = ScrollDirectionStop;
-    if (_isCycleShow) {
-        if (_curryPage == 0) {
-            [self scroll2Page:_pageCount - 2 animated:NO];
-        } else if(_curryPage == _pageCount - 1){
-            [self scroll2Page:1 animated:NO];
-        }
-    }
+
+//    if (_isCycleShow) {
+//        if (_curryPage == 0) {
+//            [self scroll2Page:_pageCount - 2 animated:NO];
+//        } else if(_curryPage == _pageCount - 1){
+//            [self scroll2Page:1 animated:NO];
+//        }
+//    }
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "CHGMenuViewDemoViewController.h"
 #import "CHGTabPageViewViewController.h"
 #import "SampleViewController.h"
+#import "MenuViewController.h"
 
 @interface AppDelegate ()
 

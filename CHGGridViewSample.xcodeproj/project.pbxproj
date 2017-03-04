@@ -32,6 +32,8 @@
 		5F1C3A151E69DC1500F51EEA /* CHGMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A141E69DC1500F51EEA /* CHGMenuView.m */; };
 		5F1C3A2A1E69DCE100F51EEA /* CHGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A271E69DCE100F51EEA /* CHGGridView.m */; };
 		5F1C3A2B1E69DCE100F51EEA /* CHGGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C3A291E69DCE100F51EEA /* CHGGridViewCell.m */; };
+		5F6316D81E6AAE6400CC0BD1 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F6316D61E6AAE6400CC0BD1 /* MenuViewController.m */; };
+		5F6316D91E6AAE6400CC0BD1 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F6316D71E6AAE6400CC0BD1 /* MenuViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,9 @@
 		5F1C3A271E69DCE100F51EEA /* CHGGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGGridView.m; path = CHGGridView/CHGGridViewBase/CHGGridView.m; sourceTree = "<group>"; };
 		5F1C3A281E69DCE100F51EEA /* CHGGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHGGridViewCell.h; path = CHGGridView/CHGGridViewBase/CHGGridViewCell.h; sourceTree = "<group>"; };
 		5F1C3A291E69DCE100F51EEA /* CHGGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHGGridViewCell.m; path = CHGGridView/CHGGridViewBase/CHGGridViewCell.m; sourceTree = "<group>"; };
+		5F6316D51E6AAE6400CC0BD1 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		5F6316D61E6AAE6400CC0BD1 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		5F6316D71E6AAE6400CC0BD1 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +125,7 @@
 		0EABAFAD1E690559004917EB /* CHGGridViewSample */ = {
 			isa = PBXGroup;
 			children = (
+				5F6316D41E6AAE4F00CC0BD1 /* TableView */,
 				5F1C39FF1E69D3F800F51EEA /* SampleViewController.h */,
 				5F1C3A001E69D3F800F51EEA /* SampleViewController.m */,
 				5F1C3A011E69D3F800F51EEA /* SampleViewController.xib */,
@@ -234,6 +240,16 @@
 			name = TabItem1;
 			sourceTree = "<group>";
 		};
+		5F6316D41E6AAE4F00CC0BD1 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				5F6316D51E6AAE6400CC0BD1 /* MenuViewController.h */,
+				5F6316D61E6AAE6400CC0BD1 /* MenuViewController.m */,
+				5F6316D71E6AAE6400CC0BD1 /* MenuViewController.xib */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -297,6 +313,7 @@
 				0EABAFC11E690559004917EB /* LaunchScreen.storyboard in Resources */,
 				5F1C3A031E69D3F800F51EEA /* SampleViewController.xib in Resources */,
 				0EABAFBE1E690559004917EB /* Assets.xcassets in Resources */,
+				5F6316D91E6AAE6400CC0BD1 /* MenuViewController.xib in Resources */,
 				0E50EC681E69602500CDE055 /* CHGMenuViewDemoViewController.xib in Resources */,
 				5F1C39F71E69BDBC00F51EEA /* CHGTabPageViewViewController.xib in Resources */,
 				0EABAFD71E691E31004917EB /* CHGGridViewBaseDemoViewController.xib in Resources */,
@@ -312,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EABAFB31E690559004917EB /* AppDelegate.m in Sources */,
+				5F6316D81E6AAE6400CC0BD1 /* MenuViewController.m in Sources */,
 				0EABAFB01E690559004917EB /* main.m in Sources */,
 				5F1C3A0F1E69DBFA00F51EEA /* CHGTab.m in Sources */,
 				5F1C3A101E69DBFA00F51EEA /* CHGTabItem.m in Sources */,
