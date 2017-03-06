@@ -17,6 +17,8 @@
     ///手指结束拖动
     BOOL scrollViewDidEndDragging;
     ScrollDirection scrollDirection;
+    ///判断循环是否更改
+    BOOL isCycleShowUpdate;
 }
 
 
@@ -77,6 +79,12 @@
 //        [self initView];
 //    }
 //}
+
+-(void)setIsCycleShow:(BOOL)isCycleShow {
+    isCycleShowUpdate = _isCycleShow != isCycleShow;
+    _isCycleShow = isCycleShow;
+    
+}
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
@@ -143,7 +151,32 @@
     
     
     self.contentSize = CGSizeMake(self.frame.size.width * _pageCount, 1);
-    [self createCellsOfPage:isFromReload ? _curryPage : _isCycleShow ? 1 : 0 isResize:reSize];
+//    [self createCellsOfPage:isFromReload ? _curryPage : _isCycleShow ? 1 : 0 isResize:reSize];
+    [self calenPageOnRefreshWithFromReload:isFromReload];
+    isCycleShowUpdate = NO;
+}
+
+
+-(void)calenPageOnRefreshWithFromReload:(BOOL)isFromReload {
+    if (isFromReload) {
+        if (isCycleShowUpdate) {
+            if (_isCycleShow) {
+                if (_pageCount - 2 == _curryPage) {
+                    [self createCellsOfPage:_isCycleShow ? 1 : 0 isResize:isFromReload];
+                } else {
+                    [self scroll2Page:_curryPage + 1 animated:NO];
+                }
+            }else {
+                if (_curryPage + 1  == _pageCount) {
+                    [self scroll2Page:_curryPage animated:YES];
+                } else {
+                    [self scroll2Page:_curryPage - 1 animated:NO];
+                }
+            }
+        }
+    } else {
+        [self createCellsOfPage:_isCycleShow ? 1 : 0 isResize:isFromReload];
+    }
 }
 
 ///创建指定页面的cell
