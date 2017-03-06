@@ -82,6 +82,8 @@ typedef NS_ENUM(NSUInteger, ScrollDirection) {
 @property(nonatomic,strong) NSMutableDictionary * identifiersDic;
 ///当前显示的页面
 @property(nonatomic,assign) NSInteger curryPage;
+///当前显示的页面
+@property(nonatomic,assign) NSInteger curryPageReal;
 ///是否显示页面分割线
 @property(nonatomic,assign) BOOL isShowPageDivider;
 ///是否循环显示

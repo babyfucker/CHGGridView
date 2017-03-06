@@ -49,8 +49,8 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     [self initView];
-//    [_gridView addObserver:_tab forKeyPath:@"curryPage" options:NSKeyValueObservingOptionNew context:NULL];
-//    _gridView.gridViewScrollDelegate = _tab;
+    //    [_gridView addObserver:_tab forKeyPath:@"curryPage" options:NSKeyValueObservingOptionNew context:NULL];
+    //    _gridView.gridViewScrollDelegate = _tab;
 }
 
 
@@ -166,7 +166,7 @@
 -(void)didStopInGridView:(id)gridView {
     [_tab didStopInGridView:gridView];
     
-    NSInteger page = _isCycleShow ? [gridView curryPage] - 1 : [gridView curryPage];
+    NSInteger page = [gridView curryPageReal];//_isCycleShow ? [gridView curryPage] - 1 : [gridView curryPage];
     [_tabPageViewDelegate tabPageView:self
                pageDidChangedWithPage:page
                              withCell:[_tabPageDataSource cellForTabPageView:self
