@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CHGTabPageView.h"
 
-@interface CHGTabPageViewViewController : UIViewController<CHGTabPageDataSource>
+@interface CHGTabPageViewViewController : UIViewController<CHGTabPageDataSource,CHGTabPageViewDelegate>
 
 @property(nonatomic,weak) IBOutlet CHGTabPageView * tabPageView;
 

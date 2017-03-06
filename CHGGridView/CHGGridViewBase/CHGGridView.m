@@ -296,7 +296,6 @@
 ///手指结束拖动
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     [_gridViewScrollDelegate gridView:self didEndDraggingWillDecelerate:decelerate];
-//    [self scrollViewDidStop:scrollView];
 }
 
 ///已经结束减速（停止滑动）
@@ -339,7 +338,7 @@
     }
 }
 
-///动画滑动结束
+///动画滑动结束   self scrollRectToVisible:<#(CGRect)#> animated:<#(BOOL)#>   animated = YES 调用此方法
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     [_gridViewScrollDelegate didEndScrollingAnimationInGridView:self];
     [self scrollViewDidStop:scrollView];

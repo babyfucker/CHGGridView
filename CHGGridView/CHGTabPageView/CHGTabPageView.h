@@ -18,13 +18,31 @@ typedef NS_ENUM(NSUInteger, CHGTabLocation) {
 };
 
 ///CHGTabPage的DataSource
-@protocol CHGTabPageDataSource <CHGTabDataSource>
+@protocol CHGTabPageDataSource <NSObject>
 
--(CHGGridViewCell*)cellForTabPage:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data;
+///返回TabItem
+-(CHGTabItem*)tabPageView:(id)tabPageView itemAtIndexPosition:(NSInteger)position withData:(id)data;
+///滑块的高度
+-(CGFloat)tabSliderHeight:(id)tabPageView;
+///返回滑块
+-(CHGSlider*)tabSlider:(id)tabPageView;
+///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
+-(CGFloat)tabPageScrollWidth:(id)tabPageView withPosition:(NSInteger)position withData:(id)data;
+///返回cell
+-(CHGGridViewCell*)cellForTabPageView:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data;
 
 @end
 
-@interface CHGTabPageView : UIView<CHGGridViewDataSource,CHGTabDelegate>
+///CHGTabPageViewDelegate
+@protocol CHGTabPageViewDelegate <NSObject>
+
+///当页面选择后回掉
+-(void)tabPageView:(id)tabPageView pageDidChangedWithPage:(NSInteger)page withCell:(CHGGridViewCell*)cell;
+
+
+@end
+
+@interface CHGTabPageView : UIView<CHGGridViewDataSource,CHGTabDelegate,CHGTabDataSource,CHGGridViewScrollDelegate>
 
 @property(nonatomic,strong) CHGGridView * gridView;
 @property(nonatomic,strong) CHGTab * tab;
@@ -41,6 +59,8 @@ typedef NS_ENUM(NSUInteger, CHGTabLocation) {
 @property(nonatomic,strong) NSArray * data;
 ///CHGTabPageDataSource
 @property(nonatomic,weak) IBOutlet id<CHGTabPageDataSource> tabPageDataSource;
+///CHGTabPageViewDelegate
+@property(nonatomic,weak) IBOutlet id<CHGTabPageViewDelegate> tabPageViewDelegate;
 ///item的宽度模式
 @property(nonatomic,assign) CHGTabItemLayoutMode tabItemLayoutMode;
 ///滑块的位置
