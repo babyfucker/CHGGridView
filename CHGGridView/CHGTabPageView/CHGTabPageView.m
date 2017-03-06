@@ -50,7 +50,7 @@
     // Drawing code
     [self initView];
 //    [_gridView addObserver:_tab forKeyPath:@"curryPage" options:NSKeyValueObservingOptionNew context:NULL];
-    _gridView.gridViewScrollDelegate = _tab;
+//    _gridView.gridViewScrollDelegate = _tab;
 }
 
 
@@ -58,7 +58,7 @@
 -(void)initView{
     _tab.backgroundColor = [UIColor whiteColor];
     _tab.data = _data;
-    _tab.tabDataSource = _tabPageDataSource;
+    _tab.tabDataSource = self;
     _tab.tabDelegate = self;
     _tab.tabItemLayoutMode = _tabItemLayoutMode;
     _tab.sliderLocation = _sliderLocation;
@@ -73,6 +73,7 @@
     _gridView.pagingEnabled = YES;
     _gridView.backgroundColor = self.backgroundColor;
     _gridView.gridViewDataSource = self;
+    _gridView.gridViewScrollDelegate = self;
     _gridView.isCycleShow = _isCycleShow;
     _gridView.isTimerShow = NO;
     
@@ -105,14 +106,73 @@
     return 1;
 }
 
+
+#pragma _mark CHGTabPageDataSource method
 ///返回cell
 -(CHGGridViewCell*)cellForGridView:(id)gridView itemAtIndexPosition:(NSInteger)position withData:(id)data {
-    return [_tabPageDataSource cellForTabPage:self itemAtIndexPosition:position withData:data];
+    return [_tabPageDataSource cellForTabPageView:self itemAtIndexPosition:position withData:data];
 }
+
+///返回TabItem
+-(CHGTabItem*)tab:(id)tab itemAtIndexPosition:(NSInteger)position withData:(id)data {
+    return [_tabPageDataSource tabPageView:self itemAtIndexPosition:position withData:data];
+}
+///滑块的高度
+-(CGFloat)tabSliderHeight:(id)tab {
+    return [_tabPageDataSource tabSliderHeight:self];
+}
+///返回滑块
+-(CHGSlider*)tabSlider:(id)tab {
+    return [_tabPageDataSource tabSlider:self];
+}
+///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
+-(CGFloat)tabScrollWidth:(id)tab withPosition:(NSInteger)position withData:(id)data {
+    return [_tabPageDataSource tabPageScrollWidth:self withPosition:position withData:data];
+}
+
 
 ///item被点击
 -(void)tabItemTap:(NSInteger)position {
     [_gridView scroll2Page:position - 1 animated:YES];
+}
+
+
+#pragma _mark CHGGridViewScrollDelegate method
+///手指开始拖动
+-(void)willBeginDraggingInGridView:(id)gridView {
+    [_tab willBeginDraggingInGridView:gridView];
+}
+
+///手指结束拖动
+-(void)gridView:(id)gridView didEndDraggingWillDecelerate:(BOOL)decelerate {
+    [_tab gridView:gridView didEndDraggingWillDecelerate:decelerate];
+}
+
+///已经结束减速
+-(void)didEndDeceleleratingInGridView:(id)gridView {
+    [_tab didEndDeceleleratingInGridView:gridView];
+}
+
+///滑动中
+-(void)didScrollInGridView:(id)gridView {
+    [_tab didScrollInGridView:gridView];
+}
+///滑动动画停止
+-(void)didEndScrollingAnimationInGridView:(id)gridView {
+    [_tab didEndScrollingAnimationInGridView:gridView];
+}
+
+///停止滑动
+-(void)didStopInGridView:(id)gridView {
+    [_tab didStopInGridView:gridView];
+    
+    NSInteger page = _isCycleShow ? [gridView curryPage] - 1 : [gridView curryPage];
+    [_tabPageViewDelegate tabPageView:self
+               pageDidChangedWithPage:page
+                             withCell:[_tabPageDataSource cellForTabPageView:self
+                                                         itemAtIndexPosition:page
+                                                                    withData:[_data objectAtIndex:page]]];
+    
 }
 
 @end

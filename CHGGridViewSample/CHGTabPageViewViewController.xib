@@ -154,6 +154,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="tabPageDataSource" destination="-1" id="RqV-gl-M6E"/>
+                        <outlet property="tabPageViewDelegate" destination="-1" id="eNa-wK-wTb"/>
                     </connections>
                 </view>
             </subviews>

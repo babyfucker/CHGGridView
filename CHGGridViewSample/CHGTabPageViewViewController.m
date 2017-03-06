@@ -53,14 +53,16 @@
     // Dispose of any resources that can be recreated.
 }
 
--(CHGGridViewCell*)cellForTabPage:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data {
+//-(CHGGridViewCell*)cellForTabPage:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data {
+-(CHGGridViewCell*)cellForTabPageView:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data{
     Test1GridViewCell * cell = (Test1GridViewCell*)[tabPage dequeueReusableCellWithIdentifier:@"Test1GridViewCell" withPosition:position];
     cell.label.text = data;
     return cell;
 }
 
 ///返回TabItem
--(CHGTabItem*)tab:(id)tab itemAtIndexPosition:(NSInteger)position withData:(id)data {
+//-(CHGTabItem*)tab:(id)tab itemAtIndexPosition:(NSInteger)position withData:(id)data {
+-(CHGTabItem*)tabPageView:(id)tabPageView itemAtIndexPosition:(NSInteger)position withData:(id)data {
     TabItem1 * tabItem = [TabItem1 initWithNibName:@"TabItem1"];
 //    tabItem.label.text = data;
     [tabItem setItemData:data position:position];
@@ -68,21 +70,30 @@
 }
 
 ///滑块的高度
--(CGFloat)tabSliderHeight:(id)tab {
+//-(CGFloat)tabSliderHeight:(id)tab {
+-(CGFloat)tabSliderHeight:(id)tabPageView {
     return sliderHeight;
 }
 
 ///返回滑块
--(CHGSlider*)tabSlider:(id)tab {
+//-(CHGSlider*)tabSlider:(id)tab {
+-(CHGSlider*)tabSlider:(id)tabPageView{
     CHGSlider * slider = [CHGSlider new];
     slider.backgroundColor = [UIColor blueColor];
     return slider;
 }
 
 ///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
--(CGFloat)tabScrollWidth:(id)tab withPosition:(NSInteger)position withData:(id)data {
+//-(CGFloat)tabScrollWidth:(id)tab withPosition:(NSInteger)position withData:(id)data {
+-(CGFloat)tabPageScrollWidth:(id)tabPageView withPosition:(NSInteger)position withData:(id)data {
     NSString * s = (NSString *) data;
     return s.length * 25;
+}
+
+-(void)tabPageView:(id)tabPageView pageDidChangedWithPage:(NSInteger)page withCell:(CHGGridViewCell*)cell {
+    Test1GridViewCell * cell_ = (Test1GridViewCell*)cell;
+    
+    NSLog(@"page:%li   text:%@",page,cell_.label.text);
 }
 
 
