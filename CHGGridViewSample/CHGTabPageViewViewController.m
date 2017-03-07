@@ -91,14 +91,14 @@
 }
 
 -(UIView*)leftViewInTabPageView:(id)tabPage {
-    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
     btn.backgroundColor = [UIColor redColor];
     [btn setTitle:@"左边" forState:UIControlStateNormal];
     return btn;
 }
 
 -(UIView*)rightViewInTabPageView:(id)tabPage {
-    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
     btn.backgroundColor = [UIColor greenColor];
     [btn setTitle:@"右边" forState:UIControlStateNormal];
     return btn;
