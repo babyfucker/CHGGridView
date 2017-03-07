@@ -90,6 +90,20 @@
     return s.length * 25;
 }
 
+-(UIView*)leftViewInTabPageView:(id)tabPage {
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    btn.backgroundColor = [UIColor redColor];
+    [btn setTitle:@"左边" forState:UIControlStateNormal];
+    return btn;
+}
+
+-(UIView*)rightViewInTabPageView:(id)tabPage {
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+    btn.backgroundColor = [UIColor greenColor];
+    [btn setTitle:@"右边" forState:UIControlStateNormal];
+    return btn;
+}
+
 -(void)tabPageView:(id)tabPageView pageDidChangedWithPage:(NSInteger)page withCell:(CHGGridViewCell*)cell {
     Test1GridViewCell * cell_ = (Test1GridViewCell*)cell;
     

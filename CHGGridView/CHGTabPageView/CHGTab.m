@@ -162,8 +162,9 @@
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
         [self selectItemWithPosition:curryPage fromReload:NO];
     } else {
+        CGFloat x = _slider.frame.size.width / gridView_.frame.size.width * gridView_.contentOffset.x + (gridView_.isCycleShow ? gridView_.curryPage : gridView_.curryPage + 1) * _spacing -(gridView_.isCycleShow ? _slider.frame.size.width:0);
         _slider.frame = CGRectMake(
-                                   (gridView_.contentOffset.x / gridView_.contentSize.width) * self.frame.size.width,
+                                   x,
                                    _slider.frame.origin.y,
                                    _slider.frame.size.width,
                                    _slider.frame.size.height);
