@@ -30,16 +30,17 @@ typedef NS_ENUM(NSUInteger, CHGTabLocation) {
 -(CGFloat)tabPageScrollWidth:(id)tabPageView withPosition:(NSInteger)position withData:(id)data;
 ///返回cell
 -(CHGGridViewCell*)cellForTabPageView:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data;
+///左边view
+-(UIView*)leftViewInTabPageView:(id)tabPage;
+///右边view
+-(UIView*)rightViewInTabPageView:(id)tabPage;
 
 @end
 
 ///CHGTabPageViewDelegate
 @protocol CHGTabPageViewDelegate <NSObject>
-
 ///当页面选择后回掉
 -(void)tabPageView:(id)tabPageView pageDidChangedWithPage:(NSInteger)page withCell:(CHGGridViewCell*)cell;
-
-
 @end
 
 @interface CHGTabPageView : UIView<CHGGridViewDataSource,CHGTabDelegate,CHGTabDataSource,CHGGridViewScrollDelegate>
@@ -67,6 +68,8 @@ typedef NS_ENUM(NSUInteger, CHGTabLocation) {
 @property(nonatomic,assign) CHGSliderLocation sliderLocation;
 ///是否循环显示
 @property(nonatomic,assign) BOOL isCycleShow;
+///当前页面的位置
+@property(nonatomic,assign,readonly) NSInteger curryPageReal;
 
 -(void)reloadData;
 

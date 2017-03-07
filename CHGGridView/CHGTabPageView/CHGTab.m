@@ -65,12 +65,12 @@
     [self selectItemWithPosition:_currySelectedPosition fromReload:YES];
 }
 
--(void)layoutSubviews {
-    if (_data != nil) {
-        [self initViewWithResize:YES];
-        [self selectItemWithPosition:_currySelectedPosition fromReload:NO];
-    }
-}
+//-(void)layoutSubviews {
+//    if (_data != nil) {
+//        [self initViewWithResize:YES];
+//        [self selectItemWithPosition:_currySelectedPosition fromReload:NO];
+//    }
+//}
 
 -(void)itemTap:(id)sender {
     UIView * view = sender;
@@ -87,7 +87,7 @@
     } else {
         CGFloat width = [_tabDataSource tabScrollWidth:self withPosition:position withData:_data[position]];
         rect = CGRectMake(self.contentSize.width + _spacing, _sliderLocation == CHGSliderLocationDown ? 0 : _sliderHeight, width, self.frame.size.height - _sliderHeight);
-//        [_scrollTabItemRects setValue:rect forKey:[NSString stringWithFormat:@"%li",position]];
+        //        [_scrollTabItemRects setValue:rect forKey:[NSString stringWithFormat:@"%li",position]];
     }
     return rect;
 }
@@ -162,10 +162,11 @@
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
         [self selectItemWithPosition:curryPage fromReload:NO];
     } else {
-        UIView * view = [self findViewByTag:1 withClassType:[CHGTabItem class]];
-        CGFloat offsetX = (gridView_.contentOffset.x - _spacing * curryPage) / _data.count;
-//        _slider.frame.origin = CGPointMake(offsetX + _spacing -(gridView_.isCycleShow ? view.frame.size.width + _spacing : 0), _slider.frame.origin.y);
-        _slider.frame = CGRectMake(offsetX + _spacing -(gridView_.isCycleShow ? view.frame.size.width + _spacing : 0), _slider.frame.origin.y, _slider.frame.size.width, _slider.frame.size.height);
+        _slider.frame = CGRectMake(
+                                   (gridView_.contentOffset.x / gridView_.contentSize.width) * self.frame.size.width,
+                                   _slider.frame.origin.y,
+                                   _slider.frame.size.width,
+                                   _slider.frame.size.height);
         [self selectItemWithPosition:curryPage fromReload:NO];
     }
 }
@@ -179,9 +180,6 @@
 -(void)didStopInGridView:(id)gridView {
     
 }
-
-
-
 
 #pragma - mark UIScrollViewDelegate method
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
