@@ -74,7 +74,7 @@
 
 -(void)itemTap:(id)sender {
     UIView * view = sender;
-    [_tabDelegate tabItemTap:_isCycleShow ? view.tag + 1 : view.tag];
+    [_tabDelegate tabItemTap:view.tag];
 }
 
 ///计算frame
