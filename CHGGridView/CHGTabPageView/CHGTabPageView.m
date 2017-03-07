@@ -56,6 +56,11 @@
 
 
 -(void)initView{
+    
+    UIView * leftView = [_tabPageDataSource leftViewInTabPageView:self];
+    UIView * rightView = [_tabPageDataSource rightViewInTabPageView:self];
+    
+    
     _tab.backgroundColor = [UIColor whiteColor];
     _tab.data = _data;
     _tab.tabDataSource = self;
@@ -64,7 +69,17 @@
     _tab.sliderLocation = _sliderLocation;
     _tab.spacing = _spacing;
     _tab.isCycleShow = _isCycleShow;
-    _tab.frame = CGRectMake(0, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, self.frame.size.width, _tabHeight);
+    //    _tab.frame = CGRectMake(0, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, self.frame.size.width, _tabHeight);
+    if (leftView != nil) {
+        leftView.frame = CGRectMake(0, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, leftView.frame.size.width, leftView.frame.size.height);
+        [self addSubview:leftView];
+    }
+    if (rightView != nil) {
+        rightView.frame = CGRectMake(self.frame.size.width - rightView.frame.size.width, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, rightView.frame.size.width, rightView.frame.size.height);
+        [self addSubview:rightView];
+    }
+    
+    _tab.frame = CGRectMake(leftView.frame.size.width, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, self.frame.size.width - leftView.frame.size.width - rightView.frame.size.width, _tabHeight);
     
     _gridView.frame = CGRectMake(0, _tabLocation == CHGTabLocationTop ? _tabHeight : 0, self.frame.size.width, self.frame.size.height - _tabHeight);
     _gridView.data = _data;
@@ -173,6 +188,10 @@
                                                          itemAtIndexPosition:page
                                                                     withData:[_data objectAtIndex:page]]];
     
+}
+
+-(NSInteger)curryPageReal {
+    return [_gridView curryPageReal];
 }
 
 @end
