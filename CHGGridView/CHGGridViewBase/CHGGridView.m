@@ -85,6 +85,10 @@
         if (_timer == nil) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
                 NSLog(@"当前view：%@",self.superview.superview);
+                if (_data == nil || _data.count == 0) {
+                    [self closeTimer];
+                    return;
+                }
                 NSInteger curryPageTemp = self.curryPageReal + 1;
                 [self scroll2Page:curryPageTemp >= self.pageCount ? 0 : curryPageTemp animated:YES];
             }];
