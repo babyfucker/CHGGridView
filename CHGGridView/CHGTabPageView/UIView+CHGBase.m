@@ -19,4 +19,10 @@
     return nil;
 }
 
+-(void)removeSubviews {
+    for (UIView * view in self.subviews) {
+        [view removeFromSuperview];
+    }
+}
+
 @end

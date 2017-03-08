@@ -302,9 +302,6 @@
     //    NSLog(@"当前页：%li",_curryPage);
 }
 
-
-
-
 ///滑动中
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     //    NSLog(@"滑动中");

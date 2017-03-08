@@ -11,12 +11,12 @@
 @implementation CHGTabItem
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 +(id)initWithNibName:(NSString*) nibName {
     NSArray * views = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
@@ -31,7 +31,10 @@
 }
 
 ///当item被点击后此方法会被调用  selected == true 表示被调用,  此方法中写 item被选中后和选择前的变化
--(void)setSelected_:(BOOL)selected {
+//-(void)setSelected_:(BOOL)selected {
+//
+//}
+-(void)setCurryItemSelected:(BOOL)curryItemSelected {
     
 }
 
