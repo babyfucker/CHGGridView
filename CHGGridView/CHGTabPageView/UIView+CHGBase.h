@@ -12,5 +12,7 @@
 
 ///通过tag 在view中寻找view
 -(UIView*)findViewByTag:(NSInteger)tag withClassType:(Class)classType;
+///移除子views
+-(void)removeSubviews;
 
 @end

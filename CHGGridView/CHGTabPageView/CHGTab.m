@@ -19,6 +19,8 @@
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.delegate = self;
+    
+    [self removeSubviews];
     self.slider = [_tabDataSource tabSlider:self];
     [self addSubview:_slider];
     [self initViewWithResize:NO];
@@ -43,7 +45,10 @@
             cell.tag = i + 1;
             [cell addTarget:self action:@selector(itemTap:) forControlEvents:UIControlEventTouchUpInside];
             [cell setItemData:_data[i] position:i];
-            cell.curryItemSelected = i == 0;///如果是第一个默认选中
+            if (i == _currySelectedPosition) {
+                self.currySelectedTabItem = cell;
+            }
+            [cell setCurryItemSelected:i == _currySelectedPosition];
             [self addSubview:cell];
             if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
                 self.contentSize = CGSizeMake(self.contentSize.width + _spacing + cell.frame.size.width, 1);
@@ -99,8 +104,8 @@
             UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
             if (view1 != nil) {
                 CHGTabItem * currySelectItem = (CHGTabItem*)view1;
-                [currySelectItem setSelected_:YES];
-                [_currySelectedTabItem setSelected_:NO];
+                [currySelectItem setCurryItemSelected:YES];
+                [_currySelectedTabItem setCurryItemSelected:NO];
                 CGRect rect = CGRectMake(currySelectItem.center.x - self.frame.size.width / 2, 0, self.frame.size.width, self.frame.size.height);
                 [self scrollRectToVisible:rect animated:YES];
                 _currySelectedTabItem = currySelectItem;
@@ -112,8 +117,8 @@
     UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
     if (view1 != nil) {
         CHGTabItem * currySelectItem = (CHGTabItem*)view1;
-        [currySelectItem setSelected_:YES];
-        [_currySelectedTabItem setSelected_:NO];
+        [currySelectItem setCurryItemSelected:YES];
+        [_currySelectedTabItem setCurryItemSelected:NO];
         CGRect rect = CGRectMake(currySelectItem.center.x - self.frame.size.width / 2, 0, self.frame.size.width, self.frame.size.height);
         [self scrollRectToVisible:rect animated:YES];
         _currySelectedTabItem = currySelectItem;

@@ -22,15 +22,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.automaticallyAdjustsScrollViewInsets = YES;
-    [_tabPageView registerNibName:@"Test1GridViewCell" forCellReuseIdentifier:@"Test1GridViewCell"];
+    [_tabPageView registerNibName:@"Test1GridViewCell" forCellReuseIdentifier:@"Test1GridViewCell"];//注册nib文件， 类似 UITableViewCell 的用法 ,优化性能能。可以注册多个nib文件
     _tabPageView.data = [self simaluData];
     _tabPageView.tabHeight = 45;
     _tabPageView.tabLocation = CHGTabLocationTop;
     _tabPageView.tabItemLayoutMode = CHGTabItemLayoutModeAutoWidth;
     _tabPageView.spacing = 5;
     _tabPageView.sliderLocation = CHGSliderLocationDown;
+    _tabPageView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tabPageView.isCycleShow = YES;
     sliderHeight = 1;
+    ///如果想定义按钮点击后和点击前的效果可用继承CHGTabItem类重新 setCurryItemSelected方法来实现
 }
 
 -(NSArray*)simaluData {
@@ -53,7 +55,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//-(CHGGridViewCell*)cellForTabPage:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data {
+
 -(CHGGridViewCell*)cellForTabPageView:(id)tabPage itemAtIndexPosition:(NSInteger)position withData:(id)data{
     Test1GridViewCell * cell = (Test1GridViewCell*)[tabPage dequeueReusableCellWithIdentifier:@"Test1GridViewCell" withPosition:position];
     cell.label.text = data;
@@ -61,7 +63,6 @@
 }
 
 ///返回TabItem
-//-(CHGTabItem*)tab:(id)tab itemAtIndexPosition:(NSInteger)position withData:(id)data {
 -(CHGTabItem*)tabPageView:(id)tabPageView itemAtIndexPosition:(NSInteger)position withData:(id)data {
     TabItem1 * tabItem = [TabItem1 initWithNibName:@"TabItem1"];
 //    tabItem.label.text = data;
@@ -70,13 +71,11 @@
 }
 
 ///滑块的高度
-//-(CGFloat)tabSliderHeight:(id)tab {
 -(CGFloat)tabSliderHeight:(id)tabPageView {
     return sliderHeight;
 }
 
 ///返回滑块
-//-(CHGSlider*)tabSlider:(id)tab {
 -(CHGSlider*)tabSlider:(id)tabPageView{
     CHGSlider * slider = [CHGSlider new];
     slider.backgroundColor = [UIColor blueColor];
@@ -84,7 +83,6 @@
 }
 
 ///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
-//-(CGFloat)tabScrollWidth:(id)tab withPosition:(NSInteger)position withData:(id)data {
 -(CGFloat)tabPageScrollWidth:(id)tabPageView withPosition:(NSInteger)position withData:(id)data {
     NSString * s = (NSString *) data;
     return s.length * 25;
