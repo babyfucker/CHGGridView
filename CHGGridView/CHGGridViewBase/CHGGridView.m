@@ -18,6 +18,8 @@
     BOOL scrollViewDidEndDragging;
     ///滑动方向
     ScrollDirection scrollDirection;
+    ///当前是否正在创建Cell
+    BOOL isCreateCells;
 }
 
 
@@ -150,10 +152,10 @@
 
 ///创建指定页面的cell
 -(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
-    if (page >= _pageCount || page < 0) {
+    if (page >= _pageCount || page < 0 || isCreateCells) {
         return;
     }
-    
+    isCreateCells = YES;
     NSInteger columTemp = -1;
     for (int i=0; i<[self calculateCountOfCellInPage:page]; i++) {
         if (i % _maxColumnsOfOnePage == 0) {
@@ -161,6 +163,7 @@
         }
         [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
     }
+    isCreateCells = NO;
 }
 
 ///计算指定页面总共有多少cell
@@ -310,12 +313,14 @@
     if (currScrollX > lastScrollDownX) {
         scrollDirection = ScrollDirectionLeft;
         if (self.contentOffset.x >= self.frame.size.width * _curryPage) {
+            NSLog(@"调试信息:%li",_curryPage);
             _curryPage += 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
     } else if(currScrollX < lastScrollDownX){
         scrollDirection = ScrollDirectionRight;
         if (self.contentOffset.x <= self.frame.size.width * _curryPage) {
+            NSLog(@"调试信息:%li",_curryPage);
             _curryPage -= 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
