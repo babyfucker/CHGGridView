@@ -97,7 +97,8 @@
 
 -(void)setCurryPage:(NSInteger)curryPage {
     _curryPage = curryPage;
-    self.curryPageReal = _isCycleShow ? _curryPage - 1 : _curryPage;
+    NSInteger curryPageRealTemp = _isCycleShow ? _curryPage - 1 : _curryPage;
+    self.curryPageReal = curryPageRealTemp < 0 ? 0 : curryPageRealTemp;
 }
 
 -(void)reloadData {
@@ -170,13 +171,11 @@
     if (_data == nil || _data.count == 0) return;
     self.curryPage = [self calculateCurryPageIsFromReload:isFromReload];
     [self createCellsOfPage:_curryPage isResize:reSize];
-    [self scroll2Page:_curryPageReal animated:NO];
-//    self.curryPageReal = _curryPageReal;
     
+    [self scroll2Page:_curryPageReal animated:NO];
 }
 
 -(NSInteger)calculateCurryPageIsFromReload:(BOOL)isFromReload {
-//    if (isFromReload) return _curryPage;
     NSInteger page = 0;
     if (isFromReload) {///来自于reload方法触发
         if (isCycleShowUpdate) {///如果循环状态发生变化
@@ -188,7 +187,6 @@
                 page = page < 0 ? 0 : page;
             }
         } else {
-            
             page = _curryPage;
         }
     }
@@ -211,10 +209,12 @@
 
 ///创建指定页面的cell
 -(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
+    double s = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow];
 //    NSLog(@"========================================%li",page);
     if (page >= _pageCount || page < 0 || isCreateCells) return;
 //    NSLog(@"---------------------------------------");
     
+    curryCreatedPage = page;
     isCreateCells = YES;
     NSInteger columTemp = -1;
     for (int i=0; i<[self calculateCountOfCellInPage:page]; i++) {
@@ -224,7 +224,7 @@
         [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
     }
     isCreateCells = NO;
-//    curryCreatedPage = page;
+    NSLog(@"当前时间：%f",[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow] - s);
 }
 
 -(NSInteger)calculatePositionWithPage:(NSInteger)page andPosition:(NSInteger)i isCycleShow:(BOOL)isCycleShow{
@@ -375,7 +375,7 @@
 }
 
 -(NSArray*)modfIfCarryMax:(CGFloat)f{
-    float f1,f2;
+    float f2;
     CGFloat ff = f == 0 ? 0.00001 : f;
     CGFloat a = modff(ff, &f2);   ///f为传入参数， f2为整数部分    a为小数部分
 //    NSLog(@"传入参数= %f     a= %f    f2= %f",f,a,f2);
@@ -408,6 +408,7 @@
             self.curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
+
     } else if(currScrollX < lastScrollDownX){
         scrollDirection = ScrollDirectionRight;
         if (fxTemp > fx) {

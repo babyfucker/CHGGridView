@@ -10,12 +10,16 @@
 #import "CHGTabItem.h"
 #import "UIView+CHGBase.h"
 
-@implementation CHGTab
+@implementation CHGTab {
+    CGFloat nextBtnWidth;
+    CGFloat minValueTemp;
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
+    minValueTemp = 1;
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.delegate = self;
@@ -126,12 +130,12 @@
     }
 }
 
--(CGFloat)modfIfCarryMax:(CGFloat)f{
-    float f1,f2;
-    CGFloat ff = f == 0 ? 0.00001 : f;
-    CGFloat a = modff(f1, &f2);
-    return f1 == 0 ? 1.0 : f2;
-}
+//-(CGFloat)modfIfCarryMax:(CGFloat)f{
+//    float f1,f2;
+//    CGFloat ff = f == 0 ? 0.00001 : f;
+//    CGFloat a = modff(f1, &f2);
+//    return f1 == 0 ? 1.0 : f2;
+//}
 
 ///计算滑动的百分比
 -(CGFloat)calculatePercent:(CGFloat)ratio scrollDirection:(ScrollDirection)scrollDirection {
@@ -158,22 +162,66 @@
     
 }
 
+
+-(CGFloat)modfIfCarryMax:(CGFloat)f{
+    float f2;
+    CGFloat ff = f == 0 ? 0.00001 : f;
+    CGFloat a = modff(ff, &f2);   ///f为传入参数， f2为整数部分    a为小数部分
+    NSLog(@"a = %f      f2=%f",a,f2);
+    return a == 0 ? 1.0 :f2;
+//    return @[@(a),@(f2)];
+}
+
+-(CGFloat)getRateWithValue:(CGFloat)rate {
+    CGFloat minValue = floorf(rate);
+    CGFloat maxValue = rate - minValue;
+    
+    if (minValueTemp < minValue) {
+        maxValue = 1;
+    }
+    minValueTemp = minValue;
+    return maxValue;
+}
+
 ///滑动中
 -(void)didScrollInGridView:(id)gridView {
     CHGGridView * gridView_ = (CHGGridView *)gridView;
     
+    CGFloat rateTemp = gridView_.contentOffset.x / gridView_.frame.size.width;
+//    CGFloat rate = [self getRateWithValue:rateTemp];
+    
     NSInteger curryPage = lroundf(gridView_.contentOffset.x / gridView_.frame.size.width);
     curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
+//        
+//        CGFloat width = [_tabDataSource tabScrollWidth:self withPosition:curryPage withData:_data[curryPage]];
+//        
+//        CGFloat x = width / gridView_.frame.size.width * gridView_.contentOffset.x + (gridView_.isCycleShow ? gridView_.curryPage : gridView_.curryPage + 1) * _spacing -(gridView_.isCycleShow ? width:0);
+//
+//
+//        
+//        NSLog(@"maxValue:%f",rate);
+//        _slider.frame = CGRectMake(
+//                                   x,
+//                                   _slider.frame.origin.y,
+//                                   width,
+//                                   _slider.frame.size.height);
+        
+        
         [self selectItemWithPosition:curryPage fromReload:NO];
+        
+//        nextBtnWidth = width;
+        
     } else {
         CGFloat x = _slider.frame.size.width / gridView_.frame.size.width * gridView_.contentOffset.x + (gridView_.isCycleShow ? gridView_.curryPage : gridView_.curryPage + 1) * _spacing -(gridView_.isCycleShow ? _slider.frame.size.width:0);
+        
         _slider.frame = CGRectMake(
                                    x,
                                    _slider.frame.origin.y,
                                    _slider.frame.size.width,
                                    _slider.frame.size.height);
         [self selectItemWithPosition:curryPage fromReload:NO];
+        NSLog(@"x===================      %f",x);
     }
 }
 
