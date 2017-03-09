@@ -112,7 +112,7 @@
     if (_isTimerShow) {
         if (_timer == nil) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-                NSLog(@"当前view：%@",self.superview.superview);
+//                NSLog(@"当前view：%@",self.superview.superview);
                 if (_data == nil || _data.count == 0) {
                     [self closeTimer];
                     return;
@@ -211,9 +211,9 @@
 
 ///创建指定页面的cell
 -(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
-    NSLog(@"========================================%li",page);
+//    NSLog(@"========================================%li",page);
     if (page >= _pageCount || page < 0 || isCreateCells) return;
-    NSLog(@"---------------------------------------");
+//    NSLog(@"---------------------------------------");
     
     isCreateCells = YES;
     NSInteger columTemp = -1;
@@ -257,8 +257,8 @@
 -(void)createViewWithIndex:(NSInteger)i withColumn:(NSInteger)column inPage:(NSInteger)page isResize:(BOOL)isResize {
     NSInteger framePosition = [self calculatePositionWithPage:page andPosition:i isCycleShow:_isCycleShow];//创建cell的时候使用正常页面计算，如果是循环展示，获取数据应该取比当前页面小一页的数据
     NSInteger dataPosition = [self calculatePositionWithPage:_isCycleShow ? page - 1 : page andPosition:i isCycleShow:NO];//
-    NSLog(@"framePosition:%li",framePosition);
-    NSLog(@"dataPosition:%li",dataPosition);
+//    NSLog(@"framePosition:%li",framePosition);
+//    NSLog(@"dataPosition:%li",dataPosition);
     if (_gridViewDataSource == nil) {
         return;
     }
