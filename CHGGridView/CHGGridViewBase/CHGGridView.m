@@ -86,7 +86,7 @@
     if (_isTimerShow) {
         if (_timer == nil) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-                NSLog(@"当前view：%@",self.superview.superview);
+//                NSLog(@"当前view：%@",self.superview.superview);
                 if (_data == nil || _data.count == 0) {
                     [self closeTimer];
                     return;
@@ -313,14 +313,14 @@
     if (currScrollX > lastScrollDownX) {
         scrollDirection = ScrollDirectionLeft;
         if (self.contentOffset.x >= self.frame.size.width * _curryPage) {
-            NSLog(@"调试信息:%li",_curryPage);
+//            NSLog(@"调试信息:%li",_curryPage);
             _curryPage += 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
     } else if(currScrollX < lastScrollDownX){
         scrollDirection = ScrollDirectionRight;
         if (self.contentOffset.x <= self.frame.size.width * _curryPage) {
-            NSLog(@"调试信息:%li",_curryPage);
+//            NSLog(@"调试信息:%li",_curryPage);
             _curryPage -= 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
