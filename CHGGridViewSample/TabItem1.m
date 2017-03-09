@@ -18,8 +18,8 @@
 }
 */
 
--(void)setSelected_:(BOOL)selected {
-    _label.textColor = selected ? [UIColor redColor] :[UIColor blackColor];
+-(void)setCurryItemSelected:(BOOL)curryItemSelected {
+    _label.textColor = curryItemSelected ? [UIColor redColor] :[UIColor blackColor];
 }
 
 -(void)setItemData:(id)data position:(NSInteger)position{

@@ -20,6 +20,13 @@
     ScrollDirection scrollDirection;
     ///当前是否正在创建Cell
     BOOL isCreateCells;
+    
+    NSInteger curryCreatedPage;
+    
+    ///获取整数部分
+    CGFloat fz;
+    ///获取小数部分
+    CGFloat fx;
 }
 
 
@@ -52,6 +59,7 @@
 
 ///初始化默认值
 -(void)initDefaultValues {
+    curryCreatedPage = -1;
     self.cacheCount = 2;
     self.timeInterval = 1;
     self.isShowPageDivider = NO;
@@ -142,28 +150,10 @@
     
     self.contentSize = CGSizeMake(self.frame.size.width * _pageCount, 1);
     if (_data == nil || _data.count == 0) return;
-    [self createCellsOfPage:_curryPage isResize:reSize];
+    [self createCellsOfPage:_curryPageReal isResize:reSize];
     [self scroll2Page:_curryPageReal animated:NO];
     self.curryPageReal = _curryPageReal;
     
-}
-
-
-
-///创建指定页面的cell
--(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
-    if (page >= _pageCount || page < 0 || isCreateCells) {
-        return;
-    }
-    isCreateCells = YES;
-    NSInteger columTemp = -1;
-    for (int i=0; i<[self calculateCountOfCellInPage:page]; i++) {
-        if (i % _maxColumnsOfOnePage == 0) {
-            columTemp += 1;
-        }
-        [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
-    }
-    isCreateCells = NO;
 }
 
 ///计算指定页面总共有多少cell
@@ -178,6 +168,24 @@
         }
     }
     return page + 1 < _pageCount ? _maxCellsOfOnePage : _data.count - page * _maxCellsOfOnePage;
+}
+
+///创建指定页面的cell
+-(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
+//    NSLog(@"========================================%li",page);
+    if (page >= _pageCount || page < 0 || isCreateCells) return;
+//    NSLog(@"---------------------------------------");
+    
+    isCreateCells = YES;
+    NSInteger columTemp = -1;
+    for (int i=0; i<[self calculateCountOfCellInPage:page]; i++) {
+        if (i % _maxColumnsOfOnePage == 0) {
+            columTemp += 1;
+        }
+        [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
+    }
+    isCreateCells = NO;
+//    curryCreatedPage = page;
 }
 
 ///创建cell
@@ -305,22 +313,47 @@
     //    NSLog(@"当前页：%li",_curryPage);
 }
 
+-(NSArray*)modfIfCarryMax:(CGFloat)f{
+    float f1,f2;
+    CGFloat ff = f == 0 ? 0.00001 : f;
+    CGFloat a = modff(ff, &f2);   ///f为传入参数， f2为整数部分    a为小数部分
+//    NSLog(@"传入参数= %f     a= %f    f2= %f",f,a,f2);
+    
+    return @[@(a),@(f2)];
+}
+
 ///滑动中
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    //    NSLog(@"滑动中");
+    NSArray * temp = [self modfIfCarryMax:self.contentOffset.x / self.frame.size.width];
+    CGFloat fxTemp = [temp[0] floatValue];
+    
     [_gridViewScrollDelegate didScrollInGridView:self];
     CGFloat currScrollX = scrollView.contentOffset.x;
     if (currScrollX > lastScrollDownX) {
         scrollDirection = ScrollDirectionLeft;
-        if (self.contentOffset.x >= self.frame.size.width * _curryPage) {
-            NSLog(@"调试信息:%li",_curryPage);
+//        if (self.contentOffset.x >= self.frame.size.width * _curryPage) {
+//        _curryPage += 1;
+//        [self createCellsOfPage:_curryPage isResize:NO];
+//    }
+
+        if (fx == 0) {
             _curryPage += 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
+        if (fxTemp < fx) {
+            _curryPage += 1;
+            _curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
+            [self createCellsOfPage:_curryPage isResize:NO];
+        }
+        
+        
     } else if(currScrollX < lastScrollDownX){
         scrollDirection = ScrollDirectionRight;
-        if (self.contentOffset.x <= self.frame.size.width * _curryPage) {
-            NSLog(@"调试信息:%li",_curryPage);
+//        if (self.contentOffset.x <= self.frame.size.width * _curryPage) {
+//        _curryPage -= 1;
+//        [self createCellsOfPage:_curryPage isResize:NO];
+//    }
+        if (fxTemp > fx) {
             _curryPage -= 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
@@ -333,12 +366,14 @@
     if (_isCycleShow) {
         if (_curryPage == 0 && self.contentOffset.x <= 0) {
             scrollView.contentOffset = CGPointMake(self.frame.size.width * (_pageCount - 2) + self.contentOffset.x, 0);
+            [self createCellsOfPage:_curryPage isResize:NO];
         } else if(_curryPage == _pageCount - 1 && self.contentOffset.x >= self.frame.size.width * (_pageCount - 1)){
             CGFloat xx = self.contentOffset.x - self.frame.size.width * (_pageCount - 1);
             scrollView.contentOffset = CGPointMake(self.frame.size.width + xx, 0);
+            [self createCellsOfPage:_curryPage isResize:NO];
         }
-        [self createCellsOfPage:_curryPage isResize:NO];
     }
+    fx = fxTemp;
 }
 
 ///动画滑动结束   self scrollRectToVisible:<#(CGRect)#> animated:<#(BOOL)#>   animated = YES 调用此方法
