@@ -31,7 +31,59 @@
     BOOL isCycleShowUpdate;
     ///是否是reload
     BOOL isReload;
+    CGFloat minValueTemp;
     
+    float pageValueMax;
+    ///滑动发生轮回
+    BOOL isRebirth;
+}
+
+//1
+//当viewController 被创建并且被显示在屏幕上的时候会执行此时的newSuperview 不为空，   当ViewController退出的时候此方法也会被执行，但是newSuperview为空
+-(void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (newSuperview == nil) {
+        //说明当前页面被退出了
+        [self closeTimer];
+    } else {
+        self.backgroundColor = self.backgroundColor;
+    }
+    NSLog(@"willMoveToSuperview：%@",newSuperview);
+    
+}
+
+//2 当ViewController被创建 和 ViewController退出的时候会被执行
+-(void)didMoveToSuperview {
+    [super didMoveToSuperview];
+    NSLog(@"didMoveToSuperview");
+}
+
+//3 退出当前ViewController的时候为空，   进入当前ViewController 从其他ViewController中返回的时候 参数不为空。  进入其他ViewController中的时候会被执行3次（第1、第3次参数为空，第2次参赛不为空）
+-(void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    NSLog(@"willMoveToWindow:%@",newWindow);
+    if (newWindow == nil) {
+        //简单处理，暂时关闭   以后需改成恢复运行 以节约内存开销
+        [self closeTimer];
+    } else {
+        [self startTimer];
+    }
+}
+
+//4  执行了2次  后面又多执行了2次
+-(void)willRemoveSubview:(UIView *)subview{
+    [super willRemoveSubview:subview];
+    NSLog(@"willRemoveSubview");
+}
+
+//5 进入 退出 重新出现 都会被执行，   进入其他页面的时候会被执行3次
+-(void)didMoveToWindow {
+    [super didMoveToWindow];
+    NSLog(@"didMoveToWindow");
+}
+
+-(void)dealloc {
+    NSLog(@"dealloc");
 }
 
 -(void)setIsCycleShow:(BOOL)isCycleShow {
@@ -79,21 +131,21 @@
     self.identifiersDic = [NSMutableDictionary new];
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+///从后台进入前台可以能被调用， 或者从其他页面返回当前页面也可能被调用
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
+    minValueTemp = -999;
+    pageValueMax = -999;
+//    fx = 0;
+    NSLog(@"drawRect   subViews:%@",self.subviews);
     self.delegate = self;
     [self initViewFromReload:NO];
     if (_data == nil || _data.count == 0) return;
     [self startTimer];
 }
 
--(void)willMoveToSuperview:(UIView *)newSuperview {
-    [super willMoveToSuperview:newSuperview];
-    self.backgroundColor = self.backgroundColor;
-}
+
 
 -(void)setCurryPage:(NSInteger)curryPage {
     _curryPage = curryPage;
@@ -104,6 +156,8 @@
 -(void)reloadData {
     isReload = YES;
     fx = 0;
+    minValueTemp = -999;
+    pageValueMax = -999;
     [self removeSubviews];
     [self initViewFromReload:YES];
     [self startTimer];
@@ -113,14 +167,16 @@
     if (_isTimerShow) {
         if (_timer == nil) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-//                NSLog(@"当前view：%@",self.superview.superview);
                 if (_data == nil || _data.count == 0) {
                     [self closeTimer];
                     return;
                 }
+                NSLog(@"定时器");
                 NSInteger curryPageTemp = self.curryPageReal + 1;
                 [self scroll2Page:curryPageTemp >= self.pageCount ? 0 : curryPageTemp animated:YES];
             }];
+        } else {
+            //如果timer不为空
         }
     } else {
         [self closeTimer];
@@ -210,9 +266,9 @@
 ///创建指定页面的cell
 -(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
     double s = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow];
-//    NSLog(@"========================================%li",page);
+    NSLog(@"========================================%li",page);
     if (page >= _pageCount || page < 0 || isCreateCells) return;
-//    NSLog(@"---------------------------------------");
+    NSLog(@"---------------------------------------");
     
     curryCreatedPage = page;
     isCreateCells = YES;
@@ -224,7 +280,7 @@
         [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
     }
     isCreateCells = NO;
-    NSLog(@"当前时间：%f",[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow] - s);
+//    NSLog(@"当前时间：%f",[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow] - s);
 }
 
 -(NSInteger)calculatePositionWithPage:(NSInteger)page andPosition:(NSInteger)i isCycleShow:(BOOL)isCycleShow{
@@ -374,14 +430,75 @@
     //    NSLog(@"当前页：%li",_curryPage);
 }
 
--(NSArray*)modfIfCarryMax:(CGFloat)f{
-    float f2;
-    CGFloat ff = f == 0 ? 0.00001 : f;
-    CGFloat a = modff(ff, &f2);   ///f为传入参数， f2为整数部分    a为小数部分
-//    NSLog(@"传入参数= %f     a= %f    f2= %f",f,a,f2);
-    
-    return @[@(a),@(f2)];
+//-(NSArray*)modfIfCarryMax:(CGFloat)f{
+//    float f2;
+//    CGFloat ff = f == 0 ? 0.00001 : f;
+//    CGFloat a = modff(ff, &f2);   ///f为传入参数， f2为整数部分    a为小数部分
+//    return @[@(a),@(f2)];
+//}
+
+-(CGFloat)judgePageChange:(CGFloat)rate {
+    CGFloat minValue = floorf(rate);
+    CGFloat maxValue = rate - minValue;
+//    NSLog(@"minValue:%f                   minValueTemp:%f",minValue,minValueTemp);
+    if (minValue != minValueTemp) {
+        minValueTemp = minValue;
+        return true;
+    } else {
+        return false;
+    }
 }
+
+/////滑动中
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (isReload) {
+//        fx = 0;
+//        isReload = NO;
+//        self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
+////        self.curryPageReal = _isCycleShow ? _curryPage - 1 : _curryPage;
+//        return;
+//    };
+//
+//    BOOL change = [self judgePageChange:scrollView.contentOffset.x / self.frame.size.width];
+//    [_gridViewScrollDelegate didScrollInGridView:self];
+//    CGFloat currScrollX = scrollView.contentOffset.x;
+//    if (currScrollX > lastScrollDownX) {
+//        scrollDirection = ScrollDirectionLeft;
+//        if (change) {
+//            self.curryPage += 1;
+//            self.curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
+//            [self createCellsOfPage:_curryPage isResize:NO];
+//        }
+//
+//    } else if(currScrollX < lastScrollDownX){
+//        scrollDirection = ScrollDirectionRight;
+//        if (change) {
+//            self.curryPage -= 1;
+//            [self createCellsOfPage:_curryPage isResize:NO];
+//        }
+//    }
+////    lastScrollDownX = currScrollX;
+//    self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
+//    
+//    ///循环滚动
+//    if (_isCycleShow) {
+//        if (_curryPage == 0 && self.contentOffset.x <= 0) {
+//            NSLog(@"_curryPage     之前:%li    x:%f",_curryPage,self.contentOffset.x);
+//            scrollView.contentOffset = CGPointMake(self.frame.size.width * (_pageCount - 2) + self.contentOffset.x, 0);
+//            [self createCellsOfPage:_curryPage isResize:NO];
+//            NSLog(@"_curryPage     之后:%li    x:%f",_curryPage,self.contentOffset.x);
+//        } else if(_curryPage == _pageCount - 1 && self.contentOffset.x >= self.frame.size.width * (_pageCount - 1)){
+//            CGFloat xx = self.contentOffset.x - self.frame.size.width * (_pageCount - 1);
+//            scrollView.contentOffset = CGPointMake(self.frame.size.width + xx, 0);
+//            [self createCellsOfPage:_curryPage isResize:NO];
+//            NSLog(@"+++++++");
+//        }
+//    }
+//    lastScrollDownX = currScrollX;
+//    
+//}
+
+
 
 ///滑动中
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -389,49 +506,62 @@
         fx = 0;
         isReload = NO;
         self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
-//        self.curryPageReal = _isCycleShow ? _curryPage - 1 : _curryPage;
+//        pageValueMax = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);
+        lastScrollDownX = scrollView.contentOffset.x;
         return;
     };
-    NSArray * temp = [self modfIfCarryMax:self.contentOffset.x / self.frame.size.width];
-    CGFloat fxTemp = [temp[0] floatValue];
     
-    [_gridViewScrollDelegate didScrollInGridView:self];
-    CGFloat currScrollX = scrollView.contentOffset.x;
-    if (currScrollX > lastScrollDownX) {
-        scrollDirection = ScrollDirectionLeft;
-        if (fx == 0) {
-            self.curryPage += 1;
-            [self createCellsOfPage:_curryPage isResize:NO];
+        [_gridViewScrollDelegate didScrollInGridView:self];
+        CGFloat currScrollX = scrollView.contentOffset.x;
+        float pageValueMaxTemp = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);
+    
+        if (currScrollX > lastScrollDownX) {
+            scrollDirection = ScrollDirectionLeft;
+            if (isRebirth) {
+                self.curryPage = _pageCount - 2;
+                [self createCellsOfPage:_curryPage isResize:NO];
+                isRebirth = NO;
+            } else {
+                if (pageValueMaxTemp != pageValueMax) {
+                    self.curryPage += 1;
+                    self.curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
+                    [self createCellsOfPage:_curryPage isResize:NO];
+                }
+            }
+        } else if(currScrollX < lastScrollDownX){
+            scrollDirection = ScrollDirectionRight;
+            if (isRebirth) {
+                self.curryPage = 1;
+                [self createCellsOfPage:_curryPage isResize:NO];
+                isRebirth = NO;
+            } else {
+                if (pageValueMaxTemp != pageValueMax) {
+                    self.curryPage -= 1;
+                    [self createCellsOfPage:_curryPage isResize:NO];
+                }
+            }
         }
-        if (fxTemp < fx) {
-            self.curryPage += 1;
-            self.curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
-            [self createCellsOfPage:_curryPage isResize:NO];
-        }
-
-    } else if(currScrollX < lastScrollDownX){
-        scrollDirection = ScrollDirectionRight;
-        if (fxTemp > fx) {
+    
+    self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
+    lastScrollDownX = currScrollX;
+    pageValueMax = pageValueMaxTemp;
+    
+    if (_isCycleShow) {
+        if (pageValueMax == 0 && self.contentOffset.x <= 0) {
+            NSLog(@"pageValueMax     之前:%f    x:%f",pageValueMax,self.contentOffset.x);
+            isRebirth = YES;
+            scrollView.contentOffset = CGPointMake(self.frame.size.width * (_pageCount - 2) + self.contentOffset.x, 0);
             self.curryPage -= 1;
             [self createCellsOfPage:_curryPage isResize:NO];
-        }
-    }
-    lastScrollDownX = currScrollX;
-    self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
-//    self.curryPageReal = _isCycleShow ? _curryPage - 1 : _curryPage;
-    
-    ///循环滚动
-    if (_isCycleShow) {
-        if (_curryPage == 0 && self.contentOffset.x <= 0) {
-            scrollView.contentOffset = CGPointMake(self.frame.size.width * (_pageCount - 2) + self.contentOffset.x, 0);
-            [self createCellsOfPage:_curryPage isResize:NO];
-        } else if(_curryPage == _pageCount - 1 && self.contentOffset.x >= self.frame.size.width * (_pageCount - 1)){
+            NSLog(@"pageValueMax     之后:%f    x:%f",pageValueMax,self.contentOffset.x);
+        } else if(_curryPage == _pageCount - 1 && self.contentOffset.x >= self.frame.size.width * (_pageCount - 1)) {
+            isRebirth = YES;
             CGFloat xx = self.contentOffset.x - self.frame.size.width * (_pageCount - 1);
             scrollView.contentOffset = CGPointMake(self.frame.size.width + xx, 0);
+            self.curryPage += 1;
             [self createCellsOfPage:_curryPage isResize:NO];
         }
     }
-    fx = fxTemp;
 }
 
 ///动画滑动结束   self scrollRectToVisible:<#(CGRect)#> animated:<#(BOOL)#>   animated = YES 调用此方法
