@@ -8,6 +8,7 @@
 
 #import "CHGGridViewBaseDemoViewController.h"
 #import "Test1GridViewCell.h"
+#import "SampleViewController.h"
 
 @interface CHGGridViewBaseDemoViewController () {
     NSInteger columns;
@@ -67,7 +68,8 @@
 
 ///gridView item被点击
 -(void)gridView:(id)gridView didSelecteAtPosition:(NSInteger)position withData:(id)data {
-    
+    SampleViewController * vc = [[SampleViewController alloc] initWithNibName:@"SampleViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
