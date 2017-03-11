@@ -511,36 +511,36 @@
         return;
     };
     
-        [_gridViewScrollDelegate didScrollInGridView:self];
-        CGFloat currScrollX = scrollView.contentOffset.x;
-        float pageValueMaxTemp = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);
-    
-        if (currScrollX > lastScrollDownX) {
-            scrollDirection = ScrollDirectionLeft;
-            if (isRebirth) {
-                self.curryPage = _pageCount - 2;
+    [_gridViewScrollDelegate didScrollInGridView:self];
+    CGFloat currScrollX = scrollView.contentOffset.x;
+    float pageValueMaxTemp = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);
+
+    if (currScrollX > lastScrollDownX) {
+        scrollDirection = ScrollDirectionLeft;
+        if (isRebirth) {
+            self.curryPage = _pageCount - 2;
+            [self createCellsOfPage:_curryPage isResize:NO];
+            isRebirth = NO;
+        } else {
+            if (pageValueMaxTemp != pageValueMax) {
+                self.curryPage += 1;
+                self.curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
                 [self createCellsOfPage:_curryPage isResize:NO];
-                isRebirth = NO;
-            } else {
-                if (pageValueMaxTemp != pageValueMax) {
-                    self.curryPage += 1;
-                    self.curryPage = _isCycleShow ? _curryPage >= _pageCount ? 2:_curryPage : _curryPage >= _pageCount ? _curryPage -1 : _curryPage;
-                    [self createCellsOfPage:_curryPage isResize:NO];
-                }
-            }
-        } else if(currScrollX < lastScrollDownX){
-            scrollDirection = ScrollDirectionRight;
-            if (isRebirth) {
-                self.curryPage = 1;
-                [self createCellsOfPage:_curryPage isResize:NO];
-                isRebirth = NO;
-            } else {
-                if (pageValueMaxTemp != pageValueMax) {
-                    self.curryPage -= 1;
-                    [self createCellsOfPage:_curryPage isResize:NO];
-                }
             }
         }
+    } else if(currScrollX < lastScrollDownX){
+        scrollDirection = ScrollDirectionRight;
+        if (isRebirth) {
+            self.curryPage = 1;
+            [self createCellsOfPage:_curryPage isResize:NO];
+            isRebirth = NO;
+        } else {
+            if (pageValueMaxTemp != pageValueMax) {
+                self.curryPage -= 1;
+                [self createCellsOfPage:_curryPage isResize:NO];
+            }
+        }
+    }
     
     self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
     lastScrollDownX = currScrollX;
