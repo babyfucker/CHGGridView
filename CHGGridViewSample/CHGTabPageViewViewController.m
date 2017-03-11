@@ -9,6 +9,7 @@
 #import "CHGTabPageViewViewController.h"
 #import "TabItem1.h"
 #import "Test1GridViewCell.h"
+#import "MySlider.h"
 
 @interface CHGTabPageViewViewController () {
     CGFloat sliderHeight;
@@ -24,14 +25,14 @@
     self.automaticallyAdjustsScrollViewInsets = YES;
     [_tabPageView registerNibName:@"Test1GridViewCell" forCellReuseIdentifier:@"Test1GridViewCell"];//注册nib文件， 类似 UITableViewCell 的用法 ,优化性能能。可以注册多个nib文件
     _tabPageView.data = [self simaluData];
-    _tabPageView.tabHeight = 45;
+    _tabPageView.tabHeight = 100;
     _tabPageView.tabLocation = CHGTabLocationTop;
     _tabPageView.tabItemLayoutMode = CHGTabItemLayoutModeAutoWidth;
     _tabPageView.spacing = 5;
     _tabPageView.sliderLocation = CHGSliderLocationDown;
     _tabPageView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tabPageView.isCycleShow = YES;
-    sliderHeight = 1;
+    sliderHeight = 50;
     ///如果想定义按钮点击后和点击前的效果可用继承CHGTabItem类重新 setCurryItemSelected方法来实现
 }
 
@@ -79,6 +80,9 @@
 -(CHGSlider*)tabSlider:(id)tabPageView{
     CHGSlider * slider = [CHGSlider new];
     slider.backgroundColor = [UIColor blueColor];
+    return slider;
+    ///可以使用以下自定义的Slider
+//    MySlider * slider = [MySlider initWithNibName:@"MySlider"];
     return slider;
 }
 

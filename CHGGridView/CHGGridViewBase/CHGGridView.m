@@ -132,7 +132,7 @@
     [super drawRect:rect];
     
     //    minValueTemp = -999;
-    pageValueMax = -999;
+//    pageValueMax = -999;
     //    fx = 0;
     NSLog(@"drawRect   subViews:%@",self.subviews);
     self.delegate = self;
@@ -153,7 +153,7 @@
     isReload = YES;
     fx = 0;
     //    minValueTemp = -999;
-    pageValueMax = -999;
+//    pageValueMax = -999;
     [self removeSubviews];
     [self initViewFromReload:YES];
     [self startTimer];
@@ -461,9 +461,6 @@
     }
     
     self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);
-    //    lastScrollDownX = currScrollX;
-    //    pageValueMax = pageValueMaxTemp;
-    
     if (_isCycleShow) {
         if (pageValueMax == 0 && self.contentOffset.x <= 0) {
             isRebirth = YES;
@@ -474,11 +471,8 @@
             isRebirth = YES;
             CGFloat xx = self.contentOffset.x - self.frame.size.width * (_pageCount - 1);
             scrollView.contentOffset = CGPointMake(self.frame.size.width + xx, 0);
-//            if (_curryPage != 1) {
-//                self.curryPage += 1;
-                [self createCellsOfPage:_curryPage isResize:NO];
+            [self createCellsOfPage:_curryPage isResize:NO];
             isRebirthLeft2RightEnd = YES;
-//            }
         }
     }
     if (isRebirthLeft2RightEnd) {

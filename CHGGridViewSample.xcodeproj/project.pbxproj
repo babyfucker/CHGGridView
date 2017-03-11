@@ -18,6 +18,8 @@
 		0EABAFD71E691E31004917EB /* CHGGridViewBaseDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EABAFD51E691E31004917EB /* CHGGridViewBaseDemoViewController.xib */; };
 		0EABAFDB1E691FE0004917EB /* Test1GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EABAFDA1E691FE0004917EB /* Test1GridViewCell.m */; };
 		0EABAFDD1E691FE9004917EB /* Test1GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EABAFDC1E691FE9004917EB /* Test1GridViewCell.xib */; };
+		0EAFD1A01E73D73C005E42C2 /* MySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFD19F1E73D73C005E42C2 /* MySlider.m */; };
+		0EAFD1A21E73D74A005E42C2 /* MySlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAFD1A11E73D74A005E42C2 /* MySlider.xib */; };
 		5F1C39F61E69BDBC00F51EEA /* CHGTabPageViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C39F41E69BDBC00F51EEA /* CHGTabPageViewViewController.m */; };
 		5F1C39F71E69BDBC00F51EEA /* CHGTabPageViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F1C39F51E69BDBC00F51EEA /* CHGTabPageViewViewController.xib */; };
 		5F1C39FB1E69C15100F51EEA /* TabItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1C39FA1E69C15100F51EEA /* TabItem1.m */; };
@@ -54,6 +56,9 @@
 		0EABAFD91E691FE0004917EB /* Test1GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test1GridViewCell.h; sourceTree = "<group>"; };
 		0EABAFDA1E691FE0004917EB /* Test1GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test1GridViewCell.m; sourceTree = "<group>"; };
 		0EABAFDC1E691FE9004917EB /* Test1GridViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test1GridViewCell.xib; sourceTree = "<group>"; };
+		0EAFD19E1E73D73C005E42C2 /* MySlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySlider.h; sourceTree = "<group>"; };
+		0EAFD19F1E73D73C005E42C2 /* MySlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySlider.m; sourceTree = "<group>"; };
+		0EAFD1A11E73D74A005E42C2 /* MySlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySlider.xib; sourceTree = "<group>"; };
 		5F1C39F31E69BDBC00F51EEA /* CHGTabPageViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGTabPageViewViewController.h; sourceTree = "<group>"; };
 		5F1C39F41E69BDBC00F51EEA /* CHGTabPageViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGTabPageViewViewController.m; sourceTree = "<group>"; };
 		5F1C39F51E69BDBC00F51EEA /* CHGTabPageViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHGTabPageViewViewController.xib; sourceTree = "<group>"; };
@@ -219,9 +224,20 @@
 			name = GridViewCell;
 			sourceTree = "<group>";
 		};
+		0EAFD19D1E73D71D005E42C2 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				0EAFD19E1E73D73C005E42C2 /* MySlider.h */,
+				0EAFD19F1E73D73C005E42C2 /* MySlider.m */,
+				0EAFD1A11E73D74A005E42C2 /* MySlider.xib */,
+			);
+			name = Slider;
+			sourceTree = "<group>";
+		};
 		5F1C39F21E69BD6900F51EEA /* CHGTabPageDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0EAFD19D1E73D71D005E42C2 /* Slider */,
 				5F1C39F81E69C13F00F51EEA /* TabItem1 */,
 				5F1C39F31E69BDBC00F51EEA /* CHGTabPageViewViewController.h */,
 				5F1C39F41E69BDBC00F51EEA /* CHGTabPageViewViewController.m */,
@@ -315,6 +331,7 @@
 				0EABAFBE1E690559004917EB /* Assets.xcassets in Resources */,
 				5F6316D91E6AAE6400CC0BD1 /* MenuViewController.xib in Resources */,
 				0E50EC681E69602500CDE055 /* CHGMenuViewDemoViewController.xib in Resources */,
+				0EAFD1A21E73D74A005E42C2 /* MySlider.xib in Resources */,
 				5F1C39F71E69BDBC00F51EEA /* CHGTabPageViewViewController.xib in Resources */,
 				0EABAFD71E691E31004917EB /* CHGGridViewBaseDemoViewController.xib in Resources */,
 				5F1C39FD1E69C15E00F51EEA /* TabItem1.xib in Resources */,
@@ -331,6 +348,7 @@
 				0EABAFB31E690559004917EB /* AppDelegate.m in Sources */,
 				5F6316D81E6AAE6400CC0BD1 /* MenuViewController.m in Sources */,
 				0EABAFB01E690559004917EB /* main.m in Sources */,
+				0EAFD1A01E73D73C005E42C2 /* MySlider.m in Sources */,
 				5F1C3A0F1E69DBFA00F51EEA /* CHGTab.m in Sources */,
 				5F1C3A101E69DBFA00F51EEA /* CHGTabItem.m in Sources */,
 				5F1C3A121E69DBFA00F51EEA /* UIView+CHGBase.m in Sources */,
