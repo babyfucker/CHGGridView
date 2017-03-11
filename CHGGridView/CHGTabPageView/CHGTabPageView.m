@@ -9,6 +9,10 @@
 #import "CHGTabPageView.h"
 
 @implementation CHGTabPageView
+{
+    BOOL isLayoutSubView;
+}
+
 
 
 - (instancetype)init
@@ -48,7 +52,7 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    [self initView];
+//    [self initView];
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
@@ -97,6 +101,13 @@
     [self initView];
     [_gridView reloadData];
     [_tab relaodData];
+}
+
+-(void)layoutSubviews {
+    if (!isLayoutSubView) {
+        isLayoutSubView = YES;
+        [self initView];
+    }
 }
 
 ///注册cell的nib文件

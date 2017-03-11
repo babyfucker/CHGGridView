@@ -8,7 +8,9 @@
 
 #import "CHGMenuView.h"
 
-@implementation CHGMenuView
+@implementation CHGMenuView {
+    BOOL isLayoutSubView;
+}
 
 
 - (instancetype)init
@@ -40,14 +42,25 @@
 
 - (void)drawRect:(CGRect)rect {
     //    [super drawRect:rect];
-    [self addSubview:_gridView];
-    [self addSubview:_pageControl];
-    [_gridView addObserver:self forKeyPath:@"curryPageReal" options:NSKeyValueObservingOptionNew context:NULL];
-    [self initView];
+//    [self addSubview:_gridView];
+//    [self addSubview:_pageControl];
+//    [_gridView addObserver:self forKeyPath:@"curryPageReal" options:NSKeyValueObservingOptionNew context:NULL];
+//    [self initView];
 }
 
 -(void)dealloc{
     [_gridView removeObserver:self forKeyPath:@"curryPageReal"];
+}
+
+-(void)layoutSubviews {
+    if (!isLayoutSubView) {
+        isLayoutSubView = YES;
+        [self addSubview:_gridView];
+        [self addSubview:_pageControl];
+        [_gridView addObserver:self forKeyPath:@"curryPageReal" options:NSKeyValueObservingOptionNew context:NULL];
+        [self initView];
+    }
+    
 }
 
 -(void)initView{
