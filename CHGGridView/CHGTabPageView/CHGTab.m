@@ -43,6 +43,7 @@
 }
 
 -(void)initViewWithResize:(BOOL)isResize {
+    if (_data.count == 0) return;
     self.sliderHeight = [_tabDataSource tabSliderHeight:self];
     if (!isResize) {
         if (itemTemp == nil) {
@@ -75,7 +76,8 @@
         CGFloat width = [_tabDataSource tabSliderHeight:self];
         _slider.frame = CGRectMake(0, _sliderLocation == CHGSliderLocationDown ? self.frame.size.height - _sliderHeight : 0, width, _sliderHeight);
     } else {
-        CGRect item0Frame = [self calculateRectWithPosition:_currySelectedPosition];
+        //        CGRect item0Frame = [self calculateRectWithPosition:_currySelectedPosition];
+        CGRect item0Frame  = [itemTemp[0] frame];
         //滑块1
         _slider.frame = CGRectMake(item0Frame.origin.x, _sliderLocation == CHGSliderLocationDown ? self.frame.size.height - _sliderHeight : 0, item0Frame.size.width, _sliderHeight);
         //滑块2
@@ -84,7 +86,6 @@
         _sliderC.hidden = !_isCycleShow;
         
     }
-//    _slider.hidden = _tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth;
     _sliderC.hidden = _tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth;
 }
 
@@ -114,48 +115,16 @@
 
 ///设置当前选择的位置
 -(void)selectItemWithPosition:(NSInteger)position fromReload:(BOOL)fromReload {
-    if (position < 0 || position >= _data.count ||_currySelectedPosition == position) {
-        if (fromReload) {
-            UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
-            if (view1 != nil) {
-                CHGTabItem * currySelectItem = (CHGTabItem*)view1;
-                [currySelectItem setCurryItemSelected:YES];
-                [_currySelectedTabItem setCurryItemSelected:NO];
-                CGRect rect = CGRectMake(currySelectItem.center.x - self.frame.size.width / 2, 0, self.frame.size.width, self.frame.size.height);
-                [self scrollRectToVisible:rect animated:YES];
-                _currySelectedTabItem = currySelectItem;
-                _currySelectedPosition = position;
-            }
-        }
-        return;
-    }
     UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
     if (view1 != nil) {
         CHGTabItem * currySelectItem = (CHGTabItem*)view1;
-        [currySelectItem setCurryItemSelected:YES];
         [_currySelectedTabItem setCurryItemSelected:NO];
+        [currySelectItem setCurryItemSelected:YES];
         CGRect rect = CGRectMake(currySelectItem.center.x - self.frame.size.width / 2, 0, self.frame.size.width, self.frame.size.height);
         [self scrollRectToVisible:rect animated:YES];
         _currySelectedTabItem = currySelectItem;
         _currySelectedPosition = position;
     }
-}
-
-//-(CGFloat)modfIfCarryMax:(CGFloat)f{
-//    float f1,f2;
-//    CGFloat ff = f == 0 ? 0.00001 : f;
-//    CGFloat a = modff(f1, &f2);
-//    return f1 == 0 ? 1.0 : f2;
-//}
-
-///计算滑动的百分比
--(CGFloat)calculatePercent:(CGFloat)ratio scrollDirection:(ScrollDirection)scrollDirection {
-    if (scrollDirection == ScrollDirectionLeft) {
-        return [self modfIfCarryMax:ratio];
-    } else if(scrollDirection == ScrollDirectionRight){
-        return (1 - (1 - [self modfIfCarryMax:ratio]) == 1 ? 0 : [self modfIfCarryMax:ratio]);
-    }
-    return 0;
 }
 
 ///手指开始拖动
@@ -173,36 +142,15 @@
     
 }
 
-
--(CGFloat)modfIfCarryMax:(CGFloat)f{
-    float f2;
-    CGFloat ff = f == 0 ? 0.00001 : f;
-    CGFloat a = modff(ff, &f2);   ///f为传入参数， f2为整数部分    a为小数部分
-    NSLog(@"a = %f      f2=%f",a,f2);
-    return a == 0 ? 1.0 :f2;
-//    return @[@(a),@(f2)];
-}
-
--(CGFloat)getRateWithValue:(CGFloat)rate {
-    CGFloat minValue = floorf(rate);
-    CGFloat maxValue = rate - minValue;
-    
-    if (minValueTemp < minValue) {
-        maxValue = 1;
-    }
-    minValueTemp = minValue;
-    return maxValue;
-}
-
 ///滑动中
 -(void)didScrollInGridView:(id)gridView {
     CHGGridView * gridView_ = (CHGGridView *)gridView;
     CGFloat rateTemp = gridView_.contentOffset.x / gridView_.frame.size.width;
     NSInteger minValue = floorl(rateTemp);
     NSInteger maxValue = ceill(rateTemp);
-    NSInteger curryPage = lroundf(rateTemp);
-    curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
-    
+    NSInteger curryPage = gridView_.curryPageReal;//lroundf(rateTemp);
+    //    curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
+    [self selectItemWithPosition:curryPage fromReload:NO];
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
         if (maxValue > _data.count || minValue <= 0) {
             return;
@@ -211,14 +159,13 @@
         CHGTabItem * endView = itemTemp[maxValue - 1];
         CGFloat starX = startView.frame.origin.x;
         CGFloat endX = endView.frame.origin.x;
-
+        
         CGFloat x = startView.frame.origin.x + (rateTemp - minValue)*(endX - starX);
         CGFloat w = startView.frame.size.width + (endView.frame.size.width - startView.frame.size.width) * (rateTemp - minValue);
         _slider.frame = CGRectMake(x,
                                    _slider.frame.origin.y,
                                    w,
                                    _sliderHeight);
-        [self selectItemWithPosition:curryPage fromReload:NO];
         [_slider scrollRate:rateTemp - minValue leftItem:startView rightItem:endView];
     } else {
         if (_isCycleShow) {
@@ -246,9 +193,8 @@
         CHGTabItem * endView = itemTemp[maxValue - 1];
         [_slider scrollRate:rateTemp - minValue leftItem:startView rightItem:endView];
         [_sliderC scrollRate:rateTemp - minValue leftItem:startView rightItem:endView];
-        
-        [self selectItemWithPosition:curryPage fromReload:NO];
     }
+    
 }
 
 ///循环的时候的计算方式   计算 slider的位置
