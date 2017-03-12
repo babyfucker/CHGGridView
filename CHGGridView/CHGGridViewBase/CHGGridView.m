@@ -497,13 +497,14 @@
         }
         if (isRebirthLeft2RightStart) {
             isRebirthLeft2RightStart = NO;
-            [self createCellsOfPage:_pageCount - 2 isResize:NO];
+            [self createCellsOfPage:_pageCount - 1 isResize:NO];
         }
         if (_isCycleShow) {
             if (self.contentOffset.x < self.frame.size.width) {
+                NSLog(@"::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
                 isRebirthLeft2RightStart = YES;
                 CGFloat x = self.contentOffset.x + self.frame.size.width * (_pageCount - 2);
-                lastScrollDownX = x - 0.0001;
+                lastScrollDownX = x + 0.0001;
                 scrollView.contentOffset = CGPointMake(x, 0);
                 [self createCellsOfPage:_curryPage - 1 isResize:NO];
             }
