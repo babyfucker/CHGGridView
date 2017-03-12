@@ -406,7 +406,7 @@
     float pageValueMaxTemp = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);///向上取整数  比如1.1 1.6   都会取2
     float pageValueMinTemp = floorf(scrollView.contentOffset.x/scrollView.frame.size.width);///向下取整  比如1.1  1.6 都会取1
     self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);//四舍五入   1.1 取1   1.6 取 2
-    NSLog(@"当前滑动位置：%f",currScrollX);
+//    NSLog(@"当前滑动位置：%f",currScrollX);
     
     if (currScrollX > lastScrollDownX) {  ///手指表示从右向左滑动
         scrollDirection = ScrollDirectionLeft;

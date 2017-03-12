@@ -15,29 +15,36 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvM-OW-DMm">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
-                    <state key="normal" title="Button"/>
-                </button>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0We-Kh-fOm">
-                    <rect key="frame" x="0.0" y="333.5" width="375" height="334.5"/>
-                    <segments>
-                        <segment title="First"/>
-                        <segment title="Second"/>
-                    </segments>
-                </segmentedControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flY-zB-81Y">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zky-g9-sSq">
+                    <rect key="frame" x="0.0" y="20.5" width="375" height="646.5"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="0We-Kh-fOm" firstAttribute="top" secondItem="DvM-OW-DMm" secondAttribute="bottom" id="NM7-5a-Gpm"/>
-                <constraint firstAttribute="trailing" secondItem="DvM-OW-DMm" secondAttribute="trailing" id="OnP-e7-ZZG"/>
-                <constraint firstItem="DvM-OW-DMm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PJ0-hI-ziZ"/>
-                <constraint firstItem="DvM-OW-DMm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rwd-zF-J0H"/>
-                <constraint firstAttribute="bottom" secondItem="0We-Kh-fOm" secondAttribute="bottom" id="Zba-1h-reN"/>
-                <constraint firstAttribute="trailing" secondItem="0We-Kh-fOm" secondAttribute="trailing" id="kHL-zh-0n0"/>
-                <constraint firstItem="0We-Kh-fOm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wU0-W6-wMz"/>
-                <constraint firstItem="0We-Kh-fOm" firstAttribute="height" secondItem="DvM-OW-DMm" secondAttribute="height" id="yEw-Qb-Ddi"/>
+                <constraint firstAttribute="trailing" secondItem="flY-zB-81Y" secondAttribute="trailing" id="1Hh-64-Kx9"/>
+                <constraint firstAttribute="bottom" secondItem="zky-g9-sSq" secondAttribute="bottom" id="3ty-JK-HbT"/>
+                <constraint firstItem="zky-g9-sSq" firstAttribute="height" secondItem="flY-zB-81Y" secondAttribute="height" id="99j-gQ-BDZ"/>
+                <constraint firstItem="flY-zB-81Y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BPM-bh-W4n"/>
+                <constraint firstItem="flY-zB-81Y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fwg-sY-EH8"/>
+                <constraint firstAttribute="trailing" secondItem="zky-g9-sSq" secondAttribute="trailing" id="lYb-qS-wDf"/>
+                <constraint firstItem="zky-g9-sSq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ts4-FR-yHc"/>
+                <constraint firstItem="zky-g9-sSq" firstAttribute="top" secondItem="flY-zB-81Y" secondAttribute="bottom" id="tuY-4S-KDS"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="99j-gQ-BDZ"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="btn" destination="flY-zB-81Y" id="TQL-zW-1nZ"/>
+                <outlet property="image_" destination="zky-g9-sSq" id="jiG-7y-Tkv"/>
+            </connections>
         </view>
     </objects>
 </document>

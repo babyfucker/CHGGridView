@@ -27,4 +27,8 @@
     return view;
 }
 
+-(void)scrollRate:(CGFloat)rate leftItem:(CHGTabItem*)leftItem rightItem:(CHGTabItem*)rightItem {
+    
+}
+
 @end

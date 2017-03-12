@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CHGTabItem.h"
 
 @interface CHGSlider : UIView
 
 
 +(id)initWithNibName:(NSString*) nibName;
+
+-(void)scrollRate:(CGFloat)rate leftItem:(CHGTabItem*)leftItem rightItem:(CHGTabItem*)rightItem;
 
 @end

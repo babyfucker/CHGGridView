@@ -25,28 +25,28 @@
     self.automaticallyAdjustsScrollViewInsets = YES;
     [_tabPageView registerNibName:@"Test1GridViewCell" forCellReuseIdentifier:@"Test1GridViewCell"];//注册nib文件， 类似 UITableViewCell 的用法 ,优化性能能。可以注册多个nib文件
     _tabPageView.data = [self simaluData];
-    _tabPageView.tabHeight = 100;
+    _tabPageView.tabHeight = 200;
     _tabPageView.tabLocation = CHGTabLocationTop;
     _tabPageView.tabItemLayoutMode = CHGTabItemLayoutModeAutoWidth;
     _tabPageView.spacing = 5;
     _tabPageView.sliderLocation = CHGSliderLocationDown;
     _tabPageView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tabPageView.isCycleShow = YES;
-    sliderHeight = 50;
+    sliderHeight = 150;
     ///如果想定义按钮点击后和点击前的效果可用继承CHGTabItem类重新 setCurryItemSelected方法来实现
 }
 
 -(NSArray*)simaluData {
     NSMutableArray * data = [NSMutableArray new];
     [data addObject:@"头条"];
-    [data addObject:@"要闻"];
+    [data addObject:@"滑块宽度测试"];
     [data addObject:@"娱乐"];
-    [data addObject:@"热点"];
-    [data addObject:@"体育"];
-    [data addObject:@"上海"];
-    [data addObject:@"视频"];
+    
+    
+    
+    
     [data addObject:@"网易号"];
-    [data addObject:@"财经"];
+    
     [data addObject:@"轻松一刻"];
     return data;
 }
@@ -78,18 +78,18 @@
 
 ///返回滑块
 -(CHGSlider*)tabSlider:(id)tabPageView{
-    CHGSlider * slider = [CHGSlider new];
-    slider.backgroundColor = [UIColor blueColor];
-    return slider;
-    ///可以使用以下自定义的Slider
-//    MySlider * slider = [MySlider initWithNibName:@"MySlider"];
+//    CHGSlider * slider = [CHGSlider new];
+//    slider.backgroundColor = [UIColor blueColor];
+//    return slider;
+//    /可以使用以下自定义的Slider
+    MySlider * slider = [MySlider initWithNibName:@"MySlider"];
     return slider;
 }
 
 ///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
 -(CGFloat)tabPageScrollWidth:(id)tabPageView withPosition:(NSInteger)position withData:(id)data {
     NSString * s = (NSString *) data;
-    return s.length * 25;
+    return s.length * 50;
 }
 
 -(UIView*)leftViewInTabPageView:(id)tabPage {

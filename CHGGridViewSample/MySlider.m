@@ -18,4 +18,10 @@
 }
 */
 
+-(void)scrollRate:(CGFloat)rate leftItem:(CHGTabItem*)leftItem rightItem:(CHGTabItem*)rightItem {
+    _btn.text = [NSString stringWithFormat:@"%.2f",rate];
+    NSInteger l = floorl(rate*10);
+    _image_.image = [UIImage imageNamed:[NSString stringWithFormat:@"%li",l]];
+}
+
 @end

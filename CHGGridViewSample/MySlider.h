@@ -10,4 +10,7 @@
 
 @interface MySlider : CHGSlider
 
+@property(nonatomic,weak) IBOutlet UILabel * btn;
+@property(nonatomic,weak) IBOutlet UIImageView * image_;
+
 @end
