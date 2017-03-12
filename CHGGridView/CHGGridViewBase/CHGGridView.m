@@ -20,17 +20,10 @@
     ScrollDirection scrollDirection;
     ///当前是否正在创建Cell
     BOOL isCreateCells;
-    
+    ///当前创建的页面
     NSInteger curryCreatedPage;
-    
-    ///获取整数部分
-    CGFloat fz;
-    ///获取小数部分
-    CGFloat fx;
     ///循环状态是否发生改变,  如果是yes 则说明当前 isCycleShow 的值和上次不一样
     BOOL isCycleShowUpdate;
-    ///是否是reload
-    BOOL isReload;
     ///记录page   当页面滑动完毕才会变化
     float pageValueMax;
     ///记录page   当页面滑动完毕才会变化
@@ -43,7 +36,7 @@
     BOOL isRebirthLeft2RightEnd;
     ///从左往右滑动轮回结束
     BOOL isRebirthLeft2LeftEnd;
-    
+    ///判断当前是否已经布局过
     BOOL isLayoutSubView;
     
 }
@@ -55,10 +48,7 @@
     if (newSuperview == nil) {
         //说明当前页面被退出了
         [self closeTimer];
-    } else {
-        
     }
-    
 }
 
 //2 当ViewController被创建 和 ViewController退出的时候会被执行
@@ -70,30 +60,17 @@
 //3 退出当前ViewController的时候为空，   进入当前ViewController 从其他ViewController中返回的时候 参数不为空。  进入其他ViewController中的时候会被执行3次（第1、第3次参数为空，第2次参赛不为空）
 -(void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    NSLog(@"willMoveToWindow:%@",newWindow);
     if (newWindow == nil) {
         //简单处理，暂时关闭   以后需改成恢复运行 以节约内存开销
         [self closeTimer];
     } else {
         [self startTimer];
-//        [self reloadData];
     }
 }
 
 //4 进入 退出 重新出现 都会被执行，   进入其他页面的时候会被执行3次
 -(void)didMoveToWindow {
     [super didMoveToWindow];
-    NSLog(@"didMoveToWindow");
-    
-//    pageValueMax = -999;
-//    self.delegate = self;
-//    [self initViewFromReload:NO];
-//    if (_data == nil || _data.count == 0) return;
-//    [self startTimer];
-}
-
--(void)dealloc {
-    NSLog(@"dealloc");
 }
 
 -(void)setIsCycleShow:(BOOL)isCycleShow {
@@ -128,24 +105,11 @@
     return self;
 }
 
--(void)setFrame:(CGRect)frame {
-    super.frame = frame;
-}
-
-//-(void)drawRect:(CGRect)rect {
-//    pageValueMax = -999;
-//    self.delegate = self;
-//    [self initViewFromReload:NO];
-//    if (_data == nil || _data.count == 0) return;
-//    [self startTimer];
-//}
-
 ///初始化默认值
 -(void)initDefaultValues {
     curryCreatedPage = -1;
     self.cacheCount = 2;
     self.timeInterval = 1;
-    isReload = NO;
     self.isShowPageDivider = NO;
     self.isCycleShow = YES;
     self.isTimerShow = NO;
@@ -174,9 +138,6 @@
 }
 
 -(void)reloadData {
-    isReload = YES;
-    fx = 0;
-    //    minValueTemp = -999;
     pageValueMax = -999;
     [self removeSubviews];
     [self initViewFromReload:YES];
@@ -192,7 +153,6 @@
                     [self closeTimer];
                     return;
                 }
-                NSLog(@"定时器");
                 NSInteger curryPageTemp = self.curryPageReal + 1;
                 [self scroll2Page:curryPageTemp >= self.pageCount ? 0 : curryPageTemp animated:YES];
             }];
@@ -245,12 +205,10 @@
         [self createAllRegisterCellType];
     }
     
-    
     self.contentSize = CGSizeMake(self.frame.size.width * _pageCount, 1);
     if (_data == nil || _data.count == 0) return;
     self.curryPage = [self calculateCurryPageIsFromReload:isFromReload];
     [self createCellsOfPage:_curryPage isResize:reSize];
-    
     [self scroll2Page:_curryPageReal animated:NO];
 }
 
@@ -288,11 +246,8 @@
 
 ///创建指定页面的cell
 -(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
-    //    double s = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow];
-    NSLog(@"================请求创建第 %li 页========================",page);
-    
+//    NSLog(@"================请求创建第 %li 页========================",page);
     if (page >= _pageCount || page < 0 || isCreateCells) return;
-    
     curryCreatedPage = page;
     isCreateCells = YES;
     NSInteger columTemp = -1;
@@ -303,8 +258,7 @@
         [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
     }
     isCreateCells = NO;
-    //    NSLog(@"当前时间：%f",[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSinceNow] - s);
-    NSLog(@"================创建第 %li 页 完成========================",page);
+//    NSLog(@"================创建第 %li 页 完成========================",page);
 }
 
 -(NSInteger)calculatePositionWithPage:(NSInteger)page andPosition:(NSInteger)i isCycleShow:(BOOL)isCycleShow{
@@ -348,7 +302,6 @@
 -(void)itemTouchUpInside:(id)sender {
     if (_gridViewDelegate == nil) return;
     CHGGridViewCell * cell = sender;
-    //    NSLog(@"tag:%li",cell.tag);
     [_gridViewDelegate gridView:self didSelecteAtPosition:cell.tag withData:_data[cell.tag]];
 }
 
@@ -421,16 +374,7 @@
 ///通过标识符以及当前position获取cell
 -(CHGGridViewCell*)dequeueReusableCellWithIdentifier:(NSString*)identifier withPosition:(NSInteger)position {
     NSArray * cells = _queue[identifier];
-    
-    NSInteger p;
-//    if (scrollDirection == ScrollDirectionRight) {
-//        p =  (_curryPage - 1)  % _cacheCount;
-//    } else if(scrollDirection == ScrollDirectionLeft) {
-//        p =  (_curryPage + 1)  % _cacheCount;
-//    } else {
-//        p =  _curryPage  % _cacheCount;
-//    }
-    p = curryCreatedPage % _cacheCount;
+    NSInteger p = curryCreatedPage % _cacheCount;
     CHGGridViewCell * cell = cells[position % _maxCellsOfOnePage + _maxCellsOfOnePage * p];
     return cell;
 }
@@ -453,7 +397,6 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [_gridViewScrollDelegate didEndDeceleleratingInGridView:self];
     [self scrollViewDidStop:scrollView];
-    //    NSLog(@"当前页：%li",_curryPage);
 }
 
 ///滑动中
@@ -463,8 +406,7 @@
     float pageValueMaxTemp = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);///向上取整数  比如1.1 1.6   都会取2
     float pageValueMinTemp = floorf(scrollView.contentOffset.x/scrollView.frame.size.width);///向下取整  比如1.1  1.6 都会取1
     self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);//四舍五入   1.1 取1   1.6 取 2
-
-//    NSLog(@"滑动中：%f",currScrollX);
+    NSLog(@"当前滑动位置：%f",currScrollX);
     
     if (currScrollX > lastScrollDownX) {  ///手指表示从右向左滑动
         scrollDirection = ScrollDirectionLeft;
@@ -480,13 +422,11 @@
         if (_isCycleShow) {
             if (self.contentOffset.x >= self.frame.size.width * (_pageCount - 1)) {
                 isRebirthRight2LeftStart = YES;
-                NSLog(@"移动");
                 CGFloat x = self.contentOffset.x - (self.frame.size.width * (_pageCount - 2));
                 lastScrollDownX = x - 0.0001;
                 scrollView.contentOffset = CGPointMake(x, 0);
                 ///当轮回创建玩第一页  此处应该创建第2页
                 [self createCellsOfPage:_curryPage + 1 isResize:NO];
-                NSLog(@"移动完毕");
             }
         }
         
@@ -497,11 +437,10 @@
         }
         if (isRebirthLeft2RightStart) {
             isRebirthLeft2RightStart = NO;
-            [self createCellsOfPage:_pageCount - 1 isResize:NO];
+            [self createCellsOfPage:_pageCount - 2 isResize:NO];
         }
         if (_isCycleShow) {
-            if (self.contentOffset.x < self.frame.size.width) {
-                NSLog(@"::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            if (self.contentOffset.x <= 0) {
                 isRebirthLeft2RightStart = YES;
                 CGFloat x = self.contentOffset.x + self.frame.size.width * (_pageCount - 2);
                 lastScrollDownX = x + 0.0001;
@@ -510,7 +449,6 @@
             }
         }
     } else {
-        NSLog(@"停止滑动");
         ///发生轮回完毕
     }
     

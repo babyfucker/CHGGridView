@@ -13,21 +13,39 @@
 @implementation CHGTab {
     CGFloat nextBtnWidth;
     CGFloat minValueTemp;
+    BOOL isLayoutSubView;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-    minValueTemp = 1;
-    self.showsVerticalScrollIndicator = NO;
-    self.showsHorizontalScrollIndicator = NO;
-    self.delegate = self;
-    
-    [self removeSubviews];
-    self.slider = [_tabDataSource tabSlider:self];
-    [self addSubview:_slider];
-    [self initViewWithResize:NO];
+//// Only override drawRect: if you perform custom drawing.
+//// An empty implementation adversely affects performance during animation.
+//- (void)drawRect:(CGRect)rect {
+//    // Drawing code
+//    minValueTemp = 1;
+//    self.showsVerticalScrollIndicator = NO;
+//    self.showsHorizontalScrollIndicator = NO;
+//    self.delegate = self;
+//    
+//    [self removeSubviews];
+//    self.slider = [_tabDataSource tabSlider:self];
+//    [self addSubview:_slider];
+//    [self initViewWithResize:NO];
+//}
+
+-(void)layoutSubviews {
+    if (!isLayoutSubView) {
+        isLayoutSubView = YES;
+        minValueTemp = 1;
+        self.showsVerticalScrollIndicator = NO;
+        self.showsHorizontalScrollIndicator = NO;
+        self.delegate = self;
+        
+        [self removeSubviews];
+        self.slider = [_tabDataSource tabSlider:self];
+        self.sliderC = [_tabDataSource tabSlider:self];
+        [self addSubview:_slider];
+        [self addSubview:_sliderC];
+        [self initViewWithResize:NO];
+    }
 }
 
 -(void)removeSubView{
@@ -64,9 +82,16 @@
         
     } else {
         CGRect item0Frame = [self calculateRectWithPosition:_currySelectedPosition];
+        //滑块1
         _slider.frame = CGRectMake(item0Frame.origin.x, _sliderLocation == CHGSliderLocationDown ? self.frame.size.height - _sliderHeight : 0, item0Frame.size.width, _sliderHeight);
+        //滑块2
+        _sliderC.frame = CGRectMake(-(_slider.frame.size.width + _spacing), _sliderLocation == CHGSliderLocationDown ? self.frame.size.height - _sliderHeight : 0, _slider.frame.size.width, _slider.frame.size.height);
+        
+        _sliderC.hidden = !_isCycleShow;
+        
     }
     _slider.hidden = _tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth;
+    _sliderC.hidden = _tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth;
 }
 
 -(void)relaodData {
@@ -192,37 +217,49 @@
     
     NSInteger curryPage = lroundf(gridView_.contentOffset.x / gridView_.frame.size.width);
     curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
+    
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
-//        
-//        CGFloat width = [_tabDataSource tabScrollWidth:self withPosition:curryPage withData:_data[curryPage]];
-//        
-//        CGFloat x = width / gridView_.frame.size.width * gridView_.contentOffset.x + (gridView_.isCycleShow ? gridView_.curryPage : gridView_.curryPage + 1) * _spacing -(gridView_.isCycleShow ? width:0);
-//
-//
-//        
-//        NSLog(@"maxValue:%f",rate);
-//        _slider.frame = CGRectMake(
-//                                   x,
-//                                   _slider.frame.origin.y,
-//                                   width,
-//                                   _slider.frame.size.height);
-        
-        
         [self selectItemWithPosition:curryPage fromReload:NO];
-        
-//        nextBtnWidth = width;
-        
     } else {
-        CGFloat x = _slider.frame.size.width / gridView_.frame.size.width * gridView_.contentOffset.x + (gridView_.isCycleShow ? gridView_.curryPage : gridView_.curryPage + 1) * _spacing -(gridView_.isCycleShow ? _slider.frame.size.width:0);
+        if (_isCycleShow) {
+            NSArray * array = [self calculateSliderRectWithGridView:gridView_];
+            _slider.frame = CGRectMake([array[0] floatValue],
+                                       _slider.frame.origin.y,
+                                       _slider.frame.size.width,
+                                       _slider.frame.size.height);
+            _sliderC.frame = CGRectMake([array[1] floatValue],
+                                        _sliderC.frame.origin.y,
+                                        _sliderC.frame.size.width,
+                                        _sliderC.frame.size.height);
+        } else {
+            CGFloat x = (rateTemp) * (_slider.frame.size.width + _spacing) + _spacing;
+            _slider.frame = CGRectMake(x,
+                                       _slider.frame.origin.y,
+                                       _slider.frame.size.width,
+                                       _slider.frame.size.height);
+        }
         
-        _slider.frame = CGRectMake(
-                                   x,
-                                   _slider.frame.origin.y,
-                                   _slider.frame.size.width,
-                                   _slider.frame.size.height);
         [self selectItemWithPosition:curryPage fromReload:NO];
-        NSLog(@"x===================      %f",x);
     }
+}
+
+///循环的时候的计算方式   计算 slider的位置
+-(NSArray*)calculateSliderRectWithGridView:(CHGGridView*)gridView{
+    CGFloat rateTemp = gridView.contentOffset.x / gridView.frame.size.width;
+    
+    CGFloat x = (rateTemp - 1) * (_slider.frame.size.width + _spacing) + _spacing;
+    CGFloat xCopy = 0;
+    
+    if (gridView.contentOffset.x < gridView.frame.size.width) {
+        xCopy = (_slider.frame.size.width + _spacing) * (gridView.pageCount - 2) + x ;
+    } else {
+        xCopy = - (_slider.frame.size.width + _spacing);
+    }
+    
+    if (gridView.contentOffset.x > gridView.frame.size.width * (gridView.pageCount - 2)) {
+        xCopy = x - (gridView.pageCount - 2) * (_slider.frame.size.width + _spacing);
+    }
+    return @[@(x),@(xCopy)];
 }
 
 ///滑动动画停止
