@@ -78,7 +78,7 @@
     for (int i=0; i<columns * rows * 4; i++) {
         data[i] = [NSString stringWithFormat:@"%i",i];
     }
-    [data addObject:@"测试"];
+//    [data addObject:@"测试"];
     return data;
 }
 

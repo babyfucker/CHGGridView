@@ -108,9 +108,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"curryPageReal"]) {
-        //        _pageControl.currentPage = _gridView.isCycleShow ? _gridView.curryPage - 1 : _gridView.curryPage;
-        _pageControl.currentPage = _gridView.curryPageReal;//_gridView.isCycleShow ? _gridView.curryPage - 1 : _gridView.curryPage;
-        //        NSLog(@"_gridView.curryPage:\%li",_gridView.curryPageReal);
+        _pageControl.currentPage = _gridView.curryPageReal;
     }
 }
 
