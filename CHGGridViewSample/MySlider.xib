@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MySlider">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flY-zB-81Y">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zky-g9-sSq">
+                    <rect key="frame" x="0.0" y="20.5" width="375" height="646.5"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="flY-zB-81Y" secondAttribute="trailing" id="1Hh-64-Kx9"/>
+                <constraint firstAttribute="bottom" secondItem="zky-g9-sSq" secondAttribute="bottom" id="3ty-JK-HbT"/>
+                <constraint firstItem="zky-g9-sSq" firstAttribute="height" secondItem="flY-zB-81Y" secondAttribute="height" id="99j-gQ-BDZ"/>
+                <constraint firstItem="flY-zB-81Y" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BPM-bh-W4n"/>
+                <constraint firstItem="flY-zB-81Y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fwg-sY-EH8"/>
+                <constraint firstAttribute="trailing" secondItem="zky-g9-sSq" secondAttribute="trailing" id="lYb-qS-wDf"/>
+                <constraint firstItem="zky-g9-sSq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ts4-FR-yHc"/>
+                <constraint firstItem="zky-g9-sSq" firstAttribute="top" secondItem="flY-zB-81Y" secondAttribute="bottom" id="tuY-4S-KDS"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="99j-gQ-BDZ"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="btn" destination="flY-zB-81Y" id="TQL-zW-1nZ"/>
+                <outlet property="image_" destination="zky-g9-sSq" id="jiG-7y-Tkv"/>
+            </connections>
+        </view>
+    </objects>
+</document>

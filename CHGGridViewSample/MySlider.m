@@ -1,14 +1,14 @@
 //
-//  CHGSlider.m
+//  MySlider.m
 //  CHGGridViewSample
 //
-//  Created by Hogan on 2017/3/3.
+//  Created by Hogan on 2017/3/11.
 //  Copyright © 2017年 Hogan. All rights reserved.
 //
 
-#import "CHGSlider.h"
+#import "MySlider.h"
 
-@implementation CHGSlider
+@implementation MySlider
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -18,17 +18,10 @@
 }
 */
 
-+(id)initWithNibName:(NSString*) nibName {
-    NSArray * views = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
-    id view = [views objectAtIndex:0];
-    //    CHGGridViewCell * cell = (CHGGridViewCell*)view;
-    
-    
-    return view;
-}
-
 -(void)scrollRate:(CGFloat)rate leftItem:(CHGTabItem*)leftItem rightItem:(CHGTabItem*)rightItem {
-    
+    _btn.text = [NSString stringWithFormat:@"%.2f",rate];
+    NSInteger l = floorl(rate*10);
+    _image_.image = [UIImage imageNamed:[NSString stringWithFormat:@"%li",l]];
 }
 
 @end

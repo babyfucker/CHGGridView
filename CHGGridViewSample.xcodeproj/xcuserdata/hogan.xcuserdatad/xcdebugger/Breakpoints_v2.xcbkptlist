@@ -10,11 +10,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
+            timestampString = "510829321.561696"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "-calculatePositionWithPage:andPosition:isCycleShow:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
+            timestampString = "510829321.561696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
-            endingLineNumber = "226">
+            endingLineNumber = "226"
+            landmarkName = "-calculateCurryPageIsFromReload:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
+            timestampString = "510829321.561696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388">
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-calculateCountOfCellInPage:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -38,11 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
+            timestampString = "510829321.561696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214">
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "-calculateCurryPageIsFromReload:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -52,11 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
+            timestampString = "510829321.561696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170">
+            startingLineNumber = "396"
+            endingLineNumber = "396"
+            landmarkName = "-scrollViewDidEndDecelerating:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -66,11 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
+            timestampString = "510896938.109528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179">
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-calculatePositionWithPage:andPosition:isCycleShow:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -80,25 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
+            timestampString = "510897097.746401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CHGGridView/CHGGridViewBase/CHGGridView.m"
-            timestampString = "510748437.403836"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340">
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "-scrollViewDidScroll:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

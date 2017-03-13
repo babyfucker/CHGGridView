@@ -9,7 +9,9 @@
 #import "CHGTabPageView.h"
 
 @implementation CHGTabPageView
-
+{
+    BOOL isLayoutSubView;
+}
 
 - (instancetype)init
 {
@@ -46,18 +48,12 @@
     [self addSubview:_tab];
 }
 
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-    [self initView];
-}
-
 -(void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
     _tab.backgroundColor = self.backgroundColor;
 }
 
 -(void)initView{
-    
     UIView * leftView = [_tabPageDataSource leftViewInTabPageView:self];
     UIView * rightView = [_tabPageDataSource rightViewInTabPageView:self];
     _tab.data = _data;
@@ -67,7 +63,6 @@
     _tab.sliderLocation = _sliderLocation;
     _tab.spacing = _spacing;
     _tab.isCycleShow = _isCycleShow;
-    //    _tab.frame = CGRectMake(0, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, self.frame.size.width, _tabHeight);
     if (leftView != nil) {
         leftView.frame = CGRectMake(0, _tabLocation == CHGTabLocationTop ? 0 : self.frame.size.height - _tabHeight, leftView.frame.size.width, leftView.frame.size.height);
         [self addSubview:leftView];
@@ -97,6 +92,13 @@
     [self initView];
     [_gridView reloadData];
     [_tab relaodData];
+}
+
+-(void)layoutSubviews {
+    if (!isLayoutSubView) {
+        isLayoutSubView = YES;
+        [self initView];
+    }
 }
 
 ///注册cell的nib文件
@@ -130,19 +132,21 @@
 -(CHGTabItem*)tab:(id)tab itemAtIndexPosition:(NSInteger)position withData:(id)data {
     return [_tabPageDataSource tabPageView:self itemAtIndexPosition:position withData:data];
 }
+
 ///滑块的高度
 -(CGFloat)tabSliderHeight:(id)tab {
     return [_tabPageDataSource tabSliderHeight:self];
 }
+
 ///返回滑块
 -(CHGSlider*)tabSlider:(id)tab {
     return [_tabPageDataSource tabSlider:self];
 }
+
 ///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
 -(CGFloat)tabScrollWidth:(id)tab withPosition:(NSInteger)position withData:(id)data {
     return [_tabPageDataSource tabPageScrollWidth:self withPosition:position withData:data];
 }
-
 
 ///item被点击
 -(void)tabItemTap:(NSInteger)position {
@@ -179,7 +183,7 @@
 -(void)didStopInGridView:(id)gridView {
     [_tab didStopInGridView:gridView];
     
-    NSInteger page = [gridView curryPageReal];//_isCycleShow ? [gridView curryPage] - 1 : [gridView curryPage];
+    NSInteger page = [gridView curryPageReal];
     [_tabPageViewDelegate tabPageView:self
                pageDidChangedWithPage:page
                              withCell:[_tabPageDataSource cellForTabPageView:self

@@ -49,8 +49,8 @@
 ///滑动方向判断
 typedef NS_ENUM(NSUInteger, ScrollDirection) {
     ScrollDirectionStop,    ///滑动停止
-    ScrollDirectionLeft,    ///向左滑动
-    ScrollDirectionRight    ///向右滑动
+    ScrollDirectionLeft,    ///手指从右向左滑动
+    ScrollDirectionRight    ///手指从左向右滑动
 };
 
 ///CHGGridView 主要实现横向的网格试图， 具有定时滚动，循环滚动 动态添加网格数量等功能

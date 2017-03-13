@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, CHGSliderLocation) {
 @property(nonatomic,weak) id<CHGTabDataSource> tabDataSource;
 ///滑块
 @property(nonatomic,strong) CHGSlider * slider;
+@property(nonatomic,strong) CHGSlider * sliderC;
 ///滑块位置
 @property(nonatomic,assign) CHGSliderLocation sliderLocation;
 ///滑块高度
