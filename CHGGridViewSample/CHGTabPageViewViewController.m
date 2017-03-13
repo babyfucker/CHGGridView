@@ -25,14 +25,14 @@
     self.automaticallyAdjustsScrollViewInsets = YES;
     [_tabPageView registerNibName:@"Test1GridViewCell" forCellReuseIdentifier:@"Test1GridViewCell"];//注册nib文件， 类似 UITableViewCell 的用法 ,优化性能能。可以注册多个nib文件
     _tabPageView.data = [self simaluData];
-    _tabPageView.tabHeight = 200;
+    _tabPageView.tabHeight = 80;
     _tabPageView.tabLocation = CHGTabLocationTop;
     _tabPageView.tabItemLayoutMode = CHGTabItemLayoutModeAutoWidth;
     _tabPageView.spacing = 5;
     _tabPageView.sliderLocation = CHGSliderLocationDown;
     _tabPageView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _tabPageView.isCycleShow = YES;
-    sliderHeight = 150;
+    sliderHeight = 50;
     ///如果想定义按钮点击后和点击前的效果可用继承CHGTabItem类重新 setCurryItemSelected方法来实现
 }
 
@@ -89,7 +89,7 @@
 ///获取tab的宽度 tabItemLayoutMode == CHGTabItemLayoutMode.AutoWidth 有用
 -(CGFloat)tabPageScrollWidth:(id)tabPageView withPosition:(NSInteger)position withData:(id)data {
     NSString * s = (NSString *) data;
-    return s.length * 50;
+    return s.length * 20;
 }
 
 -(UIView*)leftViewInTabPageView:(id)tabPage {

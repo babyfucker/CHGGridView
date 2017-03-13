@@ -118,8 +118,8 @@
     UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
     if (view1 != nil) {
         CHGTabItem * currySelectItem = (CHGTabItem*)view1;
-        [currySelectItem setCurryItemSelected:YES];
         [_currySelectedTabItem setCurryItemSelected:NO];
+        [currySelectItem setCurryItemSelected:YES];
         CGRect rect = CGRectMake(currySelectItem.center.x - self.frame.size.width / 2, 0, self.frame.size.width, self.frame.size.height);
         [self scrollRectToVisible:rect animated:YES];
         _currySelectedTabItem = currySelectItem;
