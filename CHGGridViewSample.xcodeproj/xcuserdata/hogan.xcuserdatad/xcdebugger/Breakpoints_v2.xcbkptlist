@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "-initViewFromReload:"
+            landmarkName = "-calculateCurryPageIsFromReload:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "235"
             endingLineNumber = "235"
-            landmarkName = "-calculateCurryPageIsFromReload:"
+            landmarkName = "-calculateCountOfCellInPage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "396"
             endingLineNumber = "396"
-            landmarkName = "-dequeueReusableCellWithIdentifier:withPosition:"
+            landmarkName = "-scrollViewDidEndDecelerating:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "265"
             endingLineNumber = "265"
-            landmarkName = "-createCellsOfPage:isResize:"
+            landmarkName = "-calculatePositionWithPage:andPosition:isCycleShow:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
