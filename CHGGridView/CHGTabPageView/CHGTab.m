@@ -115,21 +115,6 @@
 
 ///设置当前选择的位置
 -(void)selectItemWithPosition:(NSInteger)position fromReload:(BOOL)fromReload {
-    if (position < 0 || position >= _data.count ||_currySelectedPosition == position) {
-        if (fromReload) {
-            UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
-            if (view1 != nil) {
-                CHGTabItem * currySelectItem = (CHGTabItem*)view1;
-                [currySelectItem setCurryItemSelected:YES];
-                [_currySelectedTabItem setCurryItemSelected:NO];
-                CGRect rect = CGRectMake(currySelectItem.center.x - self.frame.size.width / 2, 0, self.frame.size.width, self.frame.size.height);
-                [self scrollRectToVisible:rect animated:YES];
-                _currySelectedTabItem = currySelectItem;
-                _currySelectedPosition = position;
-            }
-        }
-        return;
-    }
     UIView * view1 = [self findViewByTag:position + 1 withClassType:[CHGTabItem class]];
     if (view1 != nil) {
         CHGTabItem * currySelectItem = (CHGTabItem*)view1;
@@ -163,8 +148,8 @@
     CGFloat rateTemp = gridView_.contentOffset.x / gridView_.frame.size.width;
     NSInteger minValue = floorl(rateTemp);
     NSInteger maxValue = ceill(rateTemp);
-    NSInteger curryPage = gridView_.curryPageReal;//lroundf(rateTemp);
-    //    curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
+    NSInteger curryPage = lroundf(rateTemp);
+        curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
     [self selectItemWithPosition:curryPage fromReload:NO];
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
         if (maxValue > _data.count || minValue <= 0) {
