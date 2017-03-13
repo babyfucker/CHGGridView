@@ -11,8 +11,6 @@
 #import "UIView+CHGBase.h"
 
 @implementation CHGTab {
-    CGFloat nextBtnWidth;
-    CGFloat minValueTemp;
     BOOL isLayoutSubView;
     NSMutableArray * itemTemp;
 }
@@ -20,7 +18,6 @@
 -(void)layoutSubviews {
     if (!isLayoutSubView) {
         isLayoutSubView = YES;
-        minValueTemp = 1;
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
         self.delegate = self;
@@ -152,11 +149,11 @@
         curryPage = gridView_.isCycleShow ? curryPage - 1 : curryPage;
     [self selectItemWithPosition:curryPage fromReload:NO];
     if (_tabItemLayoutMode == CHGTabItemLayoutModeAutoWidth) {
-        if (maxValue > _data.count || minValue <= 0) {
+        if ((maxValue > _data.count || minValue < 0) || (_isCycleShow && minValue == 0) || (!_isCycleShow && maxValue == _data.count)) {
             return;
         }
-        CHGTabItem * startView = itemTemp[minValue - 1];
-        CHGTabItem * endView = itemTemp[maxValue - 1];
+        CHGTabItem * startView = itemTemp[_isCycleShow ? minValue - 1 : minValue];
+        CHGTabItem * endView = itemTemp[_isCycleShow ? maxValue - 1 : maxValue];
         CGFloat starX = startView.frame.origin.x;
         CGFloat endX = endView.frame.origin.x;
         

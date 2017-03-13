@@ -27,6 +27,7 @@
     return view;
 }
 
+///当页面滑动的时候 会传递 当前滑动进度  以及 左边和右边的按钮
 -(void)scrollRate:(CGFloat)rate leftItem:(CHGTabItem*)leftItem rightItem:(CHGTabItem*)rightItem {
     
 }
