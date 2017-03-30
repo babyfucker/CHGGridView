@@ -149,20 +149,22 @@
 -(void)startTimer {
     if (_isTimerShow) {
         if (_timer == nil) {
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-                if (_data == nil || _data.count == 0) {
-                    [self closeTimer];
-                    return;
-                }
-                NSInteger curryPageTemp = self.curryPageReal + 1;
-                [self scroll2Page:curryPageTemp >= self.pageCount ? 0 : curryPageTemp animated:YES];
-            }];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:self selector:@selector(backgroundTask) userInfo:nil repeats:YES];
         } else {
             //如果timer不为空
         }
     } else {
         [self closeTimer];
     }
+}
+
+-(void)backgroundTask {
+    if (_data == nil || _data.count == 0) {
+        [self closeTimer];
+        return;
+    }
+    NSInteger curryPageTemp = self.curryPageReal + 1;
+    [self scroll2Page:curryPageTemp >= self.pageCount ? 0 : curryPageTemp animated:YES];
 }
 
 ///关闭定时器
@@ -247,7 +249,7 @@
 
 ///创建指定页面的cell
 -(void)createCellsOfPage:(NSInteger)page isResize:(BOOL)isResize {
-//    NSLog(@"================请求创建第 %li 页========================",page);
+    //    NSLog(@"================请求创建第 %li 页========================",page);
     if (page >= _pageCount || page < 0 || isCreateCells) return;
     curryCreatedPage = page;
     isCreateCells = YES;
@@ -259,7 +261,7 @@
         [self createViewWithIndex:i withColumn:columTemp inPage:page isResize:isResize];
     }
     isCreateCells = NO;
-//    NSLog(@"================创建第 %li 页 完成========================",page);
+    //    NSLog(@"================创建第 %li 页 完成========================",page);
 }
 
 -(NSInteger)calculatePositionWithPage:(NSInteger)page andPosition:(NSInteger)i isCycleShow:(BOOL)isCycleShow{
@@ -295,7 +297,7 @@
     NSInteger dataPosition = [self calculatePositionWithPage:_isCycleShow ? page - 1 : page andPosition:i isCycleShow:NO];//
     CHGGridViewCell * cell = [_gridViewDataSource cellForGridView:self itemAtIndexPosition:_isCycleShow ? dataPosition:framePosition withData:_data[_isCycleShow ? dataPosition:framePosition]];
     cell.frame = [self calculateFrameWithPosition:framePosition andColumn:column andPage:page];
-//    NSLog(@"i:%li   计算frame：%@",i, cell);
+    //    NSLog(@"i:%li   计算frame：%@",i, cell);
     cell.tag = _isCycleShow ? dataPosition : framePosition;
     [cell addTarget:self action:@selector(itemTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:cell];
@@ -312,7 +314,7 @@
     CGFloat y = y_ * _cellHeight + _intervalOfCell * (column == 0 && !_roundLineShow ? 0 : (column +(_roundLineShow ? 1 : 0)));
     
     CGFloat x = (position % _maxColumnsOfOnePage) * _cellWidth + page * self.frame.size.width + _intervalOfCell * (position % _maxColumnsOfOnePage == 0 && !_roundLineShow ? 0 : position % _maxColumnsOfOnePage + (_roundLineShow ? 1 : 0));
-//    NSLog(@"x:%f",x);
+    //    NSLog(@"x:%f",x);
     return CGRectMake(x, y, _cellWidth, _cellHeight);
 }
 
@@ -379,7 +381,7 @@
     NSInteger p = curryCreatedPage % _cacheCount;
     
     CHGGridViewCell * cell = cells[position % _maxCellsOfOnePage + _maxCellsOfOnePage * p];
-//    NSLog(@"什么啊：%@",cell);
+    //    NSLog(@"什么啊：%@",cell);
     return cell;
 }
 
@@ -410,7 +412,7 @@
     float pageValueMaxTemp = ceilf(scrollView.contentOffset.x/scrollView.frame.size.width);///向上取整数  比如1.1 1.6   都会取2
     float pageValueMinTemp = floorf(scrollView.contentOffset.x/scrollView.frame.size.width);///向下取整  比如1.1  1.6 都会取1
     self.curryPage = lroundf(scrollView.contentOffset.x / self.frame.size.width);//四舍五入   1.1 取1   1.6 取 2
-//    NSLog(@"当前滑动位置：%f",currScrollX);
+    //    NSLog(@"当前滑动位置：%f",currScrollX);
     
     if (currScrollX > lastScrollDownX) {  ///手指表示从右向左滑动
         scrollDirection = ScrollDirectionLeft;
